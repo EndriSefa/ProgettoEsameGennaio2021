@@ -16,7 +16,7 @@ import org.json.simple.parser.ParseException;
 
 public class getDataCity {
 	
-public JSONObject getDataGivenCity(String city) {
+	public JSONObject getDataGivenCity(String city) {
 		
 		//la  stringa di openweather per la chimata con lo zip code viene divisa
 		//nelle seguenti due parti e queste vengono unite insieme al zip code e al country code

@@ -28,7 +28,7 @@ public class Controller {
 	
 	public JSONObject DataCity(@RequestParam(value = "cityName") String cityName) {
 	
-		return getDataCity(cityName);
+		return getDataGivenCity(cityName);
 		
 		}
 	
@@ -40,7 +40,7 @@ public class Controller {
 		String zip = (String) URLcomponents.get("zipCode");
 		String country = (String) URLcomponents("countryCode");
 		
-		return getDataZipCode(zip,country);
+		return getDataZip(zip,country);
 		
 	}
 	
