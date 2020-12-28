@@ -5,6 +5,10 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.time.Instant;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -67,20 +71,54 @@ public class getDataZipCode {
 				e.printStackTrace();
 			}
 			JSONObject  jsonObject = (JSONObject) obj;
-			System.out.println(obj);
+			
+			
+			
 			JSONObject main =(JSONObject) jsonObject.get("main");
 			Number temp  = (Number)  main.get("temp");
 			Number tempM  = (Number)  main.get("temp_max");
 			Number tempm  = (Number)  main.get("temp_min");
 			Number tempF  = (Number)  main.get("feels_like");
 			Number hum  = (Number)  main.get("humidity");
-			Number dat  = (Number)  jsonObject.get("dt");
+			Long dat  = (Long)  jsonObject.get("dt");
+			Long timeZone = (Long) jsonObject.get("timezone");
 			String nom   = (String)  jsonObject.get("name");
+			
+			/*
+			 * Secondi misurati dall epoch di Unix (1 Gennaio 1970)
+			 * la timezone ci serve per calcolare il fuso orario delle città
+			 */
+			
+			Instant instant = Instant.ofEpochSecond((dat + timeZone ));
+			
+			
+			//formato per ottenere dalla ZoneDateTime la data
+			DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+			
+			//formato per ottenere dalla ZoneDateTime l'ora
+			DateTimeFormatter hour = DateTimeFormatter.ofPattern("HH:mm:ss");
+			
+			//la zona temporale su cui si svolgeranno i calcoli per determinare data e ora
+			//Scegliendo Londra dove il fuso orario è +00:00 non dobbiamo aggiungere o 
+			//togliere secondi nella conversione da UNIX a data
+			
+			ZoneId z = ZoneId.of("Europe/London") ;
+			
+			//Data completa
+			ZonedDateTime zdt = instant.atZone( z );
+			
+			
+			
+			// stringa relativa alla data
+			String dataFinale =(String) dtf.format(zdt);
+			//stringa relativa all'ora
+			String ora  = (String) hour.format(zdt);
 			
 		
 			JSONObject finale = new JSONObject();
 			finale.put("Città", nom);
-			finale.put("Data", dat);
+			finale.put("Data", dataFinale);
+			finale.put("Ora", ora);
 			finale.put("Temperatura", temp);
 			finale.put("Temperatura percepita", tempF);
 			finale.put("Temperatura massima", tempM);
