@@ -14,22 +14,34 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
-public class getDataZipCode {
+public class getDataCity {
 	
-	public JSONObject getDataZip(String zipCode, String countryCode) {
+public JSONObject getDataGivenCity(String city) {
 		
 		//la  stringa di openweather per la chimata con lo zip code viene divisa
 		//nelle seguenti due parti e queste vengono unite insieme al zip code e al country code
 		
-		String parteUrl1= "api.openweathermap.org/data/2.5/weather?zip=";
-		String parteUrl2= "&units=metric&appid=a623b59c7a3e36fdfa0a3fe39a7c0745";
+		String urlLondra= "http://api.openweathermap.org/data/2.5/weather?q=London&units=metric&appid=a623b59c7a3e36fdfa0a3fe39a7c0745";
+		String urlChicago= "http://api.openweathermap.org/data/2.5/weather?q=Chicago&units=metric&appid=a623b59c7a3e36fdfa0a3fe39a7c0745";
 		
-		String urlCompleto = parteUrl1 + zipCode + ',' + countryCode + parteUrl2; 
+		 
 		
 		JSONParser parser = new JSONParser();
 		 URL url = null;
 		try {
-			url = new URL(urlCompleto);
+		//se la stringa inserita è londra utiliziamo il link di default con città Londra
+			if(city.equals("Londra")) 
+				url = new URL(urlLondra);
+		//stessa cosa per Chicago	
+			if(city.equals("Chicago")) 
+				url = new  URL(urlChicago);
+		
+		//in caso non si fosse scelta nessuna città (dobbiamo decidere cosa fare)
+			
+			
+			
+			
+			
 		} catch (MalformedURLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -104,6 +116,7 @@ public class getDataZipCode {
 			
 			ZoneId z = ZoneId.of("Europe/London") ;
 			
+			
 			//Data completa
 			ZonedDateTime zdt = instant.atZone( z );
 			
@@ -128,5 +141,4 @@ public class getDataZipCode {
 			return finale;
 		
 	}
-
 }
