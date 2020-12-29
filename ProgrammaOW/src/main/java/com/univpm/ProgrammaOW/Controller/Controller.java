@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.univpm.ProgrammaOW.Utils.getDataCity;
+import com.univpm.ProgrammaOW.Utils.getDataZipCode;
 
 import com.fasterxml.jackson.databind.util.JSONPObject;
 
@@ -42,14 +43,18 @@ public class Controller {
 		String zip = (String) URLcomponents.get("zipCode");
 		String country = (String) URLcomponents.get("countryCode");
 		
-		return getDataZip(zip,country);
+		getDataZipCode appoggio = new getDataZipCode(zip,country) ;
+		
+		 
+		
+		return appoggio.getMeteo();
 		
 	}
 	
 	//stampa le previsioni dando come parametro il nome della città
-	@GetMapping("/forecast/{city}")
+	@GetMapping("/forecast")
 	
-	public JSONArray forecast(@RequestParam(value = "city") String city){
+	public JSONArray forecast(@RequestParam(name = "city") String city){
 		
 	getWeeklyForecast previsioni = new getWeeklyForecast(getDataCity(city),getForecast());
 		
@@ -62,7 +67,7 @@ public class Controller {
 	public JSONArray forecast(@RequestBody JSONObject URLcomponents){
 		
 		String zip = (String) URLcomponents.get("zipCode");
-		String country = (String) URLcomponents("countryCode");
+		String country = (String) URLcomponents.get("countryCode");
 		
 	
 	getWeeklyForecast previsioni = new getWeeklyForecast(getDataZipCode(zip, country),getForecast());
