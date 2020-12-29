@@ -16,7 +16,9 @@ import org.json.simple.parser.ParseException;
 
 public class getDataCity {
 	
-	public JSONObject getDataGivenCity(String city) {
+	private static JSONObject  meteo = null;
+	
+	public  getDataCity(String city) {
 		
 		//la  stringa di openweather per la chimata con lo zip code viene divisa
 		//nelle seguenti due parti e queste vengono unite insieme al zip code e al country code
@@ -30,7 +32,7 @@ public class getDataCity {
 		 URL url = null;
 		try {
 		//se la stringa inserita è londra utiliziamo il link di default con città Londra
-			if(city.equals("Londra")) 
+			if(city.equals("London")) 
 				url = new URL(urlLondra);
 		//stessa cosa per Chicago	
 			if(city.equals("Chicago")) 
@@ -138,7 +140,11 @@ public class getDataCity {
 			finale.put("Temperatura minima", tempm);
 			finale.put("Umidità", hum);
 			
-			return finale;
+			meteo = finale;
 		
+	}
+	
+	public JSONObject getMeteo() {
+		return meteo;
 	}
 }

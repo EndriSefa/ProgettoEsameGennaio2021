@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.univpm.ProgrammaOW.Utils.getDataCity;
+
 import com.fasterxml.jackson.databind.util.JSONPObject;
 
 @RestController
@@ -24,12 +26,12 @@ public class Controller {
 	
 	
 	//stampa il meteo corrente ricevendo come parametro il nome della città
-	@GetMapping("/currentWeather/{cityName}")
+	@GetMapping("/currentWeather")
 	
-	public JSONObject DataCity(@RequestParam(value = "cityName") String cityName) {
+	public JSONObject DataCity(@RequestParam(name = "cityName") String cityName) {
 	
-		return getDataGivenCity(cityName);
-		
+		getDataCity meteo = new getDataCity(cityName);
+		return meteo.getMeteo();
 		}
 	
 	//stampa il meteo corrente ricevendo come parametro lo Zip Code
@@ -38,7 +40,7 @@ public class Controller {
 	public JSONObject DataZipCode(@RequestBody JSONObject URLcomponents) {
 		
 		String zip = (String) URLcomponents.get("zipCode");
-		String country = (String) URLcomponents("countryCode");
+		String country = (String) URLcomponents.get("countryCode");
 		
 		return getDataZip(zip,country);
 		

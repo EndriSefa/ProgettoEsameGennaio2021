@@ -16,7 +16,9 @@ import org.json.simple.parser.ParseException;
 
 public class getDataZipCode {
 	
-	public JSONObject getDataZip(String zipCode, String countryCode) {
+	private static JSONObject  meteo = null;
+	
+	public getDataZipCode(String zipCode, String countryCode) {
 		
 		//la  stringa di openweather per la chimata con lo zip code viene divisa
 		//nelle seguenti due parti e queste vengono unite insieme al zip code e al country code
@@ -125,8 +127,12 @@ public class getDataZipCode {
 			finale.put("Temperatura minima", tempm);
 			finale.put("Umidità", hum);
 			
-			return finale;
+			meteo = finale;
 		
+	}
+	
+	public JSONObject getMeteo() {
+		return meteo;
 	}
 
 }
