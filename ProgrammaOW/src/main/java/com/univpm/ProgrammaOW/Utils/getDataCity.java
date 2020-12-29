@@ -26,18 +26,26 @@ public class getDataCity {
 		String urlLondra= "http://api.openweathermap.org/data/2.5/weather?q=London&units=metric&appid=a623b59c7a3e36fdfa0a3fe39a7c0745";
 		String urlChicago= "http://api.openweathermap.org/data/2.5/weather?q=Chicago&units=metric&appid=a623b59c7a3e36fdfa0a3fe39a7c0745";
 		
-		 
+		 String nomeCitta = null;
 		
+		 
+		 /*
+		  * ho aggiunto la stringa nomeCitta perchè OpenWeather restituisce come stringa la città London
+		  * mentre a noi ci serve Londra
+		  */
 		JSONParser parser = new JSONParser();
 		 URL url = null;
 		try {
 		//se la stringa inserita è londra utiliziamo il link di default con città Londra
-			if(city.equals("London")) 
+			if(city.equals("London")) {
 				url = new URL(urlLondra);
+			nomeCitta = "Londra";
+			}
 		//stessa cosa per Chicago	
-			if(city.equals("Chicago")) 
+			if(city.equals("Chicago")) {
 				url = new  URL(urlChicago);
-		
+				nomeCitta = "Chicago";
+			}
 		//in caso non si fosse scelta nessuna città (dobbiamo decidere cosa fare)
 			
 			
@@ -96,7 +104,7 @@ public class getDataCity {
 			Number hum  = (Number)  main.get("humidity");
 			Long dat  = (Long)  jsonObject.get("dt");
 			Long timeZone = (Long) jsonObject.get("timezone");
-			String nom   = (String)  jsonObject.get("name");
+			
 			
 			/*
 			 * Secondi misurati dall epoch di Unix (1 Gennaio 1970)
@@ -131,7 +139,7 @@ public class getDataCity {
 			
 		
 			JSONObject finale = new JSONObject();
-			finale.put("Città", nom);
+			finale.put("Città", nomeCitta);
 			finale.put("Data", dataFinale);
 			finale.put("Ora", ora);
 			finale.put("Temperatura", temp);

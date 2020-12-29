@@ -20,7 +20,7 @@ import org.json.simple.parser.ParseException;
 
 public class updateWeeklyForecast {
 	
-	public void update() {
+	public static void update() {
 		
 		String[] urlCity = {"https://api.openweathermap.org/data/2.5/onecall?lat=51.5085&lon=-0.1257&exclude=current,minutely,hourly&units=metric&appid=a623b59c7a3e36fdfa0a3fe39a7c0745&="
 				,"https://api.openweathermap.org/data/2.5/onecall?lat=33.441792&lon=-94.037689&exclude=current,minutely,hourly&units=metric&appid=a623b59c7a3e36fdfa0a3fe39a7c0745"
