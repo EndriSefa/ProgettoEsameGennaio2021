@@ -15,7 +15,7 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
-import com.univpm.ProgrammaOW.Utils.updateWeeklyForecast;
+
 
 public class getForecast {
 	
@@ -74,6 +74,8 @@ public class getForecast {
 		if (!(dataFile.equals(dataOggi))) {
 		
 		//si aggiorna il file di appoggio così da avere i dati sul meteo aggiornati	
+		// essendo nello stesso package posso invocare il metodo senza dover importare la classe visto che sia
+		//la classe che il metodo sono public
 	    updateWeeklyForecast.update();
 			
 		String  parte1 = MeteoCorrente.substring(0,9);
