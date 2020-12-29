@@ -32,7 +32,7 @@ public class getWeeklyForecast {
 		
 		
 				
-		String citta = (String)parametro1.get("Citta");
+		String citta = (String)parametro1.get("Città");
 		
 		Vector<JSONObject> appoggio = new Vector<JSONObject>();
 		
@@ -52,7 +52,7 @@ public class getWeeklyForecast {
          for(int j=0; j<appoggio.size();j++)
 		 {
 		 JSONObject jsonObject = appoggio.get(j);
-		 String nome_citta2 = (String) jsonObject.get("Citta");
+		 String nome_citta2 = (String) jsonObject.get("Città");
 				
 		 if(nome_citta2.equals(citta) ){
 				        previsioni_filtrate_citta.add( appoggio.get(j));

@@ -1,5 +1,6 @@
 package com.univpm.ProgrammaOW.Controller;
 
+import java.util.Vector;
 import java.util.concurrent.locks.AbstractQueuedLongSynchronizer.ConditionObject;
 
 import com.univpm.ProgrammaOW.Utils.*;
@@ -54,9 +55,13 @@ public class Controller {
 	//stampa le previsioni dando come parametro il nome della città
 	@GetMapping("/forecast")
 	
-	public JSONArray forecast(@RequestParam(name = "city") String city){
+	public Vector<JSONObject> forecast(@RequestParam(name = "city") String city){
 		
-	getWeeklyForecast previsioni = new getWeeklyForecast(getDataCity(city),getForecast());
+	getDataCity appoggio1 = new getDataCity(city);
+	
+	JSONObject appoggio2 = appoggio1.getMeteo();
+		
+	getWeeklyForecast previsioni = new getWeeklyForecast(appoggio2);
 		
 	return previsioni.getForecast();
 	}
@@ -64,13 +69,15 @@ public class Controller {
 	//stampa le previsioni dando come parametri lo Zip Code e il Country Code
 	@PostMapping("/forecast")
 	
-	public JSONArray forecast(@RequestBody JSONObject URLcomponents){
+	public Vector<JSONObject> forecast(@RequestBody JSONObject URLcomponents){
 		
 		String zip = (String) URLcomponents.get("zipCode");
 		String country = (String) URLcomponents.get("countryCode");
 		
+	getDataZipCode appoggio1 = new getDataZipCode(zip,country);
+		
 	
-	getWeeklyForecast previsioni = new getWeeklyForecast(getDataZipCode(zip, country),getForecast());
+	getWeeklyForecast previsioni = new getWeeklyForecast(appoggio1.getMeteo());
 		
 	return previsioni.getForecast();
 	}

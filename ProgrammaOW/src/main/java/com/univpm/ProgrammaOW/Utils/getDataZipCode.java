@@ -23,10 +23,10 @@ public class getDataZipCode {
 		//la  stringa di openweather per la chimata con lo zip code viene divisa
 		//nelle seguenti due parti e queste vengono unite insieme al zip code e al country code
 		
-		String parteUrl1= "api.openweathermap.org/data/2.5/weather?zip=";
+		String parteUrl1= "http://api.openweathermap.org/data/2.5/weather?zip=";
 		String parteUrl2= "&units=metric&appid=a623b59c7a3e36fdfa0a3fe39a7c0745";
 		
-		String urlCompleto = parteUrl1 + zipCode + ',' + countryCode + parteUrl2; 
+		String urlCompleto = parteUrl1 + zipCode + "," + countryCode + parteUrl2; 
 		
 		JSONParser parser = new JSONParser();
 		 URL url = null;
@@ -120,7 +120,7 @@ public class getDataZipCode {
 			JSONObject finale = new JSONObject();
 			finale.put("Città", nom);
 			finale.put("Data", dataFinale);
-			finale.put("Ora", ora);
+			finale.put("Ora locale", ora);
 			finale.put("Temperatura", temp);
 			finale.put("Temperatura percepita", tempF);
 			finale.put("Temperatura massima", tempM);

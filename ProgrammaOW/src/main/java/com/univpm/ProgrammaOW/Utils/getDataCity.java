@@ -37,7 +37,7 @@ public class getDataCity {
 		 URL url = null;
 		try {
 		//se la stringa inserita è londra utiliziamo il link di default con città Londra
-			if(city.equals("London")) {
+			if(city.equals("Londra")) {
 				url = new URL(urlLondra);
 			nomeCitta = "Londra";
 			}
@@ -141,7 +141,7 @@ public class getDataCity {
 			JSONObject finale = new JSONObject();
 			finale.put("Città", nomeCitta);
 			finale.put("Data", dataFinale);
-			finale.put("Ora", ora);
+			finale.put("Ora locale", ora);
 			finale.put("Temperatura", temp);
 			finale.put("Temperatura percepita", tempF);
 			finale.put("Temperatura massima", tempM);
