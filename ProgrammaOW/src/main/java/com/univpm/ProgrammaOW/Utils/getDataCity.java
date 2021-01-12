@@ -16,7 +16,7 @@ import org.json.simple.parser.ParseException;
 
 public class getDataCity {
 	
-	private static JSONObject  meteo = null;
+	private JSONObject  meteo;
 	
 	public  getDataCity(String city) {
 		
@@ -139,7 +139,7 @@ public class getDataCity {
 			
 		
 			JSONObject finale = new JSONObject();
-			finale.put("Città", nomeCitta);
+			finale.put("Citta", nomeCitta);
 			finale.put("Data", dataFinale);
 			finale.put("Ora locale", ora);
 			finale.put("Temperatura", temp);
@@ -148,11 +148,11 @@ public class getDataCity {
 			finale.put("Temperatura minima", tempm);
 			finale.put("Umidità", hum);
 			
-			meteo = finale;
+			this.meteo = finale;
 		
 	}
 	
 	public JSONObject getMeteo() {
-		return meteo;
+		return this.meteo;
 	}
 }

@@ -118,7 +118,7 @@ public class getDataZipCode {
 			
 		
 			JSONObject finale = new JSONObject();
-			finale.put("Città", nom);
+			finale.put("Citta", nom);
 			finale.put("Data", dataFinale);
 			finale.put("Ora locale", ora);
 			finale.put("Temperatura", temp);

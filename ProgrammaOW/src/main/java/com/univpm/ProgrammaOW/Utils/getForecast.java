@@ -19,7 +19,7 @@ import org.json.simple.parser.ParseException;
 
 public class getForecast {
 	
-	private static JSONArray previsioni;
+	private  JSONArray previsioni;
 	
 	public getForecast() {
 		
@@ -56,7 +56,12 @@ public class getForecast {
         }
         
         
-        
+        try {
+			b.close();
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
         
 		
 		
@@ -177,13 +182,16 @@ public class getForecast {
 
 	 
 
-	       
+
+	        BufferedReader c;
+	        c=new BufferedReader(f);
 	        
 	        MeteoCorrente = "";
 	        line = "";
 	        
+	        
 	        try {
-	            while((line = b.readLine())!=null) {
+	            while((line = c.readLine())!=null) {
 	                MeteoCorrente += line;
 	                
 	           }

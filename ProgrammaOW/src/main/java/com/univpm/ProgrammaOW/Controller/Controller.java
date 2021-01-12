@@ -82,7 +82,7 @@ public class Controller {
 	return previsioni.getForecast();
 	}
 	
-	
+	/*
 		
 	
 	//metodo che stampa le statistiche giornaliere ricevendo come parametro il nome della città
@@ -291,7 +291,7 @@ public class Controller {
 					
 		}
 	
-	
+	*/
 	}
 	
 	

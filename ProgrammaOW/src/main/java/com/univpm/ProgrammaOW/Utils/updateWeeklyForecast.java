@@ -19,7 +19,6 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 public class updateWeeklyForecast {
-	
 	public static void update() {
 		
 		String[] urlCity = {"https://api.openweathermap.org/data/2.5/onecall?lat=51.5085&lon=-0.1257&exclude=current,minutely,hourly&units=metric&appid=a623b59c7a3e36fdfa0a3fe39a7c0745&="
@@ -163,7 +162,7 @@ public class updateWeeklyForecast {
 					previsioni.put("Temperatura percepita", tempF);
 					previsioni.put("Temperatura massima", tempM);
 					previsioni.put("Temperatura minima", tempm);
-					previsioni.put("Umidità", hum);
+					previsioni.put("Umidita", hum);
 					
 					finale.add(previsioni);
 					

@@ -20,8 +20,8 @@ public class getWeeklyForecast {
 	
 	
 	
-	private static JSONObject dailyWeather;
-	private static Vector<JSONObject> forecastW;
+	private  JSONObject dailyWeather;
+	private  Vector<JSONObject> forecastW = new Vector<JSONObject>();
 	
 	
 	
@@ -32,7 +32,7 @@ public class getWeeklyForecast {
 		
 		
 				
-		String citta = (String)parametro1.get("Città");
+		String citta = (String)parametro1.get("Citta");
 		
 		Vector<JSONObject> appoggio = new Vector<JSONObject>();
 		
@@ -52,15 +52,20 @@ public class getWeeklyForecast {
          for(int j=0; j<appoggio.size();j++)
 		 {
 		 JSONObject jsonObject = appoggio.get(j);
-		 String nome_citta2 = (String) jsonObject.get("Città");
+		 String nome_citta2 = (String) jsonObject.get("Citta");
 				
 		 if(nome_citta2.equals(citta) ){
 				        previsioni_filtrate_citta.add( appoggio.get(j));
 			    		 }
 		 }
 		 
+         
+         //vogliamo solo le prime 7 previsioni che essendo fatte giornalmente sono le
+         //ultime previsioni (sono le privisioni di questa settimana)
 		 for(JSONObject o : previsioni_filtrate_citta) {
-			 forecastW.add(o);}
+			if(this.forecastW.size() != 7) this.forecastW.add(o);
+		 }
+        
 		 
 		 dailyWeather = parametro1;
 		 
@@ -70,6 +75,6 @@ public class getWeeklyForecast {
 	     
 	     public JSONObject getDailyWeather() {return dailyWeather;}
 	     
-	     public Vector<JSONObject> getForecast() { return forecastW;}
+	     public Vector<JSONObject> getForecast() { return this.forecastW;}
 	     
 }
