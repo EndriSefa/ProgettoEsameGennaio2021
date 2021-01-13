@@ -124,7 +124,10 @@ public class updateWeeklyForecast {
 					Number tempm  = (Number)  appTemp.get("min");
 					Number tempF  = (Number)  feels.get("day");
 					Number hum  = (Number)  appoggio.get("humidity");
-					Number dat  = (Number)  jsonObject.get("dt");
+					//correzione ad un errore nel prelevamento dei dati
+					//ora il funzionamento è corretto e i dati si aggiornano automaticamente
+					//e vengono prelevati correttamente
+					Number dat  = (Number)  appoggio.get("dt");
 					String nom   = (String)  jsonObject.get("timezone");
 					
 					//purtroppo dava dei problemi la conversione in long quindi ho dovuto fare un parsing
