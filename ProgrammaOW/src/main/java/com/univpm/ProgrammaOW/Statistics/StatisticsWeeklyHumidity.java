@@ -14,6 +14,7 @@ public class StatisticsWeeklyHumidity {
 	
 	boolean Precisione;
 	double umiditaReale;
+	String risultato;
 	
 	public StatisticsWeeklyHumidity(String cityName,double precision) {
 		
@@ -27,15 +28,23 @@ public class StatisticsWeeklyHumidity {
 		
 		this.umiditaReale = (double) dailyWeather.get("Umidita");
 		
-		int cont = 0;
-		for( JSONObject o : previsioni ) {
-			double umiditaPrevista = (double)o.get("Umidita");
+		System.out.println("Umidità attuale: "+ umiditaReale);
+		for(JSONObject o : previsioni) {
+			String data = (String)o.get("data");
+	        double umiditaPrevista = (double)o.get("Umidita");
 			double percentuale = 100*(Math.abs(umiditaReale-umiditaPrevista))/umiditaReale;
-			if(percentuale <= precision) cont++;
-			
+			if(percentuale <= precision) { Precisione = true;
+			                              risultato+= "Giorno: "+data+"\n"
+			                                       + "Umidità prevista: "+ umiditaPrevista+"\n"
+			                                       +"Le previsioni del giorno erano attendibili";}
+			else {Precisione = false;
+			      risultato+="Giorno: "+data+"\n"
+			      +"Umidità prevista: "+ umiditaPrevista+"\n"
+			      +"Le previsioni del giorno non erano attendibili";
+			     }
 		}
 		
-		if(cont == 7) Precisione = true;
+		
 		
 		
 		
@@ -54,23 +63,28 @@ public class StatisticsWeeklyHumidity {
 		
 		int cont = 0;
 		for( JSONObject o : previsioni ) {
-			double umiditaPrevista = (double)o.get("Umidita");
-			double percentuale = 100*(Math.abs(umiditaReale-umiditaPrevista))/umiditaReale;
-			if(percentuale <= precision) cont++;
 			
+			String data = (String)o.get("data");
+	        double umiditaPrevista = (double)o.get("Umidita");
+			double percentuale = 100*(Math.abs(umiditaReale-umiditaPrevista))/umiditaReale;
+			if(percentuale <= precision) { Precisione = true;
+			                              risultato+= "Giorno: "+data+"\n"
+			                                       + "Umidità prevista: "+ umiditaPrevista+"\n"
+			                                       +"Le previsioni del giorno erano attendibili";}
+			else {Precisione = false;
+			      risultato+="Giorno: "+data+"\n"
+			      +"Umidità prevista: "+ umiditaPrevista+"\n"
+			      +"Le previsioni del giorno non erano attendibili";
+			     }
 		}
-		
-		if(cont == 7) Precisione = true;
-		
 	}
 	
-	public String toString() {
-		if(Precisione == true )
-		return "Umidità attuale: "+ umiditaReale+"\n"
-				+"Le previsioni erano attendibili";
-		else return "Umidità attuale: "+ umiditaReale+"\n"
-		+"Le previsioni non erano attendibili";
+	public String toString() { return risultato; }
 			
 	}
 
-}
+
+	
+	
+
+  
