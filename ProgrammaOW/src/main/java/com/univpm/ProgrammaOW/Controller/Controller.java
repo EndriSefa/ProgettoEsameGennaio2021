@@ -82,7 +82,7 @@ public class Controller {
 	return previsioni.getForecast();
 	}
 	
-	/*
+	
 		
 	
 	//metodo che stampa le statistiche giornaliere ricevendo come parametro il nome della città
@@ -93,20 +93,18 @@ public class Controller {
 		
 		String result = " ";//variabile d'appoggio per il valore di ritorno
 		
-		getWeatherPredictions predictions = new getWeatherPredictions(getDataCity(cityName),getForecast());
-		
 		switch(tipo){
 		    //stampa le statistiche giornaliere relative alla temperatura
 			case "temperature": {
 			
-			StatisticsDailyTemperature DailyTemperature = new StatisticsDailyTemperature(predictions,precision);
+			StatisticsDailyTemperature DailyTemperature = new StatisticsDailyTemperature(cityName, precision);
 			result = DailyTemperature.toString();
 			break;
 			}
 			//stampa le statistiche giornaliere relative all'umidità
 			case "humidity" : {
 			
-			StatisticsDailyHumidity DailyHumidity = new StatisticsDailyHumidity(predictions,precision);
+			StatisticsDailyHumidity DailyHumidity = new StatisticsDailyHumidity(cityName,precision);
 			result = DailyHumidity.toString();
 			break;
 			
@@ -114,8 +112,8 @@ public class Controller {
 			//stampa le statistiche giornaliere disponibili(temperatura e umidità)
 			case "all": {
 				
-			StatisticsDailyTemperature DailyTemperature = new StatisticsDailyTemperature(predictions,precision);
-			StatisticsDailyHumidity DailyHumidity = new StatisticsDailyHumidity(predictions,precision);
+			StatisticsDailyTemperature DailyTemperature = new StatisticsDailyTemperature(cityName,precision);
+			StatisticsDailyHumidity DailyHumidity = new StatisticsDailyHumidity(cityName,precision);
 			result = 	DailyTemperature.toString()+DailyHumidity.toString();
 				
 			break;
@@ -123,7 +121,7 @@ public class Controller {
 			//come valore di default mettiamo le statistiche della temperatura
 			default :{ 
 			
-	        StatisticsDailyTemperature DailyTemperature = new StatisticsDailyTemperature(predictions,precision);
+	        StatisticsDailyTemperature DailyTemperature = new StatisticsDailyTemperature(cityName,precision);
 			result = DailyTemperature.toString();
 		    break;
 	        }
@@ -139,11 +137,11 @@ public class Controller {
 		
 		String result = " ";//variabile d'appoggio per il valore di ritorno
 		
-		getWeatherPredictions predictionsForecast= new getWeatherPredictions(getDataCity(cityName),getForecast());
+		
 		switch(tipo){
 			case "temperature": {
 			
-			StatisticsWeeklyTemperature WeeklyTemperature = new StatisticsWeeklyTemperature(predictionsForecast,precision);
+			StatisticsWeeklyTemperature WeeklyTemperature = new StatisticsWeeklyTemperature(cityName,precision);
 			
 			result = WeeklyTemperature.toString();
 			
@@ -152,7 +150,7 @@ public class Controller {
 			
 			case "humidity" : {
 			
-			StatisticsWeeklyHumidity WeeklyHumidity = new StatisticsWeeklyHumidity(predictionsForecast,precision);//stesso dubbio di sopra
+			StatisticsWeeklyHumidity WeeklyHumidity = new StatisticsWeeklyHumidity(cityName,precision);
 			
 			result = WeeklyHumidity.toString();
 			
@@ -163,7 +161,7 @@ public class Controller {
 			case "all": {
 			
 			StatisticsWeeklyTemperature WeeklyTemperature = new StatisticsWeeklyTemperature(predictionsForecast,precision);
-			StatisticsWeeklyHumidity WeeklyHumidity = new StatisticsWeeklyHumidity(predictionsForecast,precision);
+			StatisticsWeeklyHumidity WeeklyHumidity = new StatisticsWeeklyHumidity(cityName,precision);
 				
 			result = WeeklyTemperature.toString()+WeeklyHumidity.toString();
 			
@@ -195,20 +193,19 @@ public class Controller {
 		
         String result = " ";//variabile d'appoggio per il valore di ritorno
 		
-		getWeatherPredictions predictions = new getWeatherPredictions(getDataZipCode(zip,country),getForecast());
-		
+       
 		switch(tipo){
 		    //stampa le statistiche giornaliere relative alla temperatura
 			case "temperature": {
 			
-			StatisticsDailyTemperature DailyTemperature = new StatisticsDailyTemperature(predictions,precision);
+			StatisticsDailyTemperature DailyTemperature = new StatisticsDailyTemperature(zip,country,precision);
 			result = DailyTemperature.toString();
 			break;
 			}
 			//stampa le statistiche giornaliere relative all'umidità
 			case "humidity" : {
 			
-			StatisticsDailyHumidity DailyHumidity = new StatisticsDailyHumidity(predictions,precision);
+			StatisticsDailyHumidity DailyHumidity = new StatisticsDailyHumidity(zip,country,precision);
 			result = DailyHumidity.toString();
 			break;
 			
@@ -217,7 +214,7 @@ public class Controller {
 			case "all": {
 				
 			StatisticsDailyTemperature DailyTemperature = new StatisticsDailyTemperature(predictions,precision);
-			StatisticsDailyHumidity DailyHumidity = new StatisticsDailyHumidity(predictions,precision);
+			StatisticsDailyHumidity DailyHumidity = new StatisticsDailyHumidity(zip,country,precision);
 			result = 	DailyTemperature.toString()+DailyHumidity.toString();
 				
 			break;
@@ -244,13 +241,13 @@ public class Controller {
 		
 		String result = " ";//variabile d'appoggio per il valore di ritorno
 		
-		getWeatherPredictions predictionsForecast= new getWeatherPredictions(getDataZipCode(zip, country),getForecast());
+		
 		
 		switch(tipo){
 			
 		    case "temperature": {
 			
-			StatisticsWeeklyTemperature WeeklyTemperature = new StatisticsWeeklyTemperature(predictionsForecast,precision);
+			StatisticsWeeklyTemperature WeeklyTemperature = new StatisticsWeeklyTemperature(zip,country,precision);
 			
 			result = WeeklyTemperature.toString();
 			
@@ -259,7 +256,7 @@ public class Controller {
 			
 			case "humidity" : {
 			
-			StatisticsWeeklyHumidity WeeklyHumidity = new StatisticsWeeklyHumidity(predictionsForecast,precision);//stesso dubbio di sopra
+			StatisticsWeeklyHumidity WeeklyHumidity = new StatisticsWeeklyHumidity(zip,country,precision);//stesso dubbio di sopra
 			
 			result = WeeklyHumidity.toString();
 			
@@ -269,8 +266,8 @@ public class Controller {
 			
 			case "all": {
 			
-			StatisticsWeeklyTemperature WeeklyTemperature = new StatisticsWeeklyTemperature(predictionsForecast,precision);
-			StatisticsWeeklyHumidity WeeklyHumidity = new StatisticsWeeklyHumidity(predictionsForecast,precision);
+			StatisticsWeeklyTemperature WeeklyTemperature = new StatisticsWeeklyTemperature(zip,country,precision);
+			StatisticsWeeklyHumidity WeeklyHumidity = new StatisticsWeeklyHumidity(zip,country,precision);
 				
 			result = WeeklyTemperature.toString()+WeeklyHumidity.toString();
 			
@@ -279,7 +276,7 @@ public class Controller {
 			
 			default : { 
 			
-			StatisticsWeeklyTemperature WeeklyTemperature = new StatisticsWeeklyTemperature(predictionsForecast,precision);
+			StatisticsWeeklyTemperature WeeklyTemperature = new StatisticsWeeklyTemperature(zip,country,precision);
 			
 			result = WeeklyTemperature.toString();
 		     	
@@ -291,7 +288,7 @@ public class Controller {
 					
 		}
 	
-	*/
+	
 	}
 	
 	
