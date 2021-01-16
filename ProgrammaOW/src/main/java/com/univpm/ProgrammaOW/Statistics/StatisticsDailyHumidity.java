@@ -32,15 +32,21 @@ public class StatisticsDailyHumidity {
 		//metodo di getWeatherPredictions
 		Vector<JSONObject> previsioni = predictions.getPredictions();
 		
-		this.umiditaReale = (double) dailyWeather.get("Umidita");
-		this.umiditaPrevista=(double) previsioni.firstElement().get("Umidita");
+		Number appoggio1 = (Number) dailyWeather.get("Umidita");
+		Number appoggio2 =(Number) previsioni.firstElement().get("Umidita");
+		
+		//per prelevare i numeri facciamo un casting da number a long 
+		//a loro volta ai dati viene fatto un parsing in double 
+		
+		this.umiditaReale = (Long) appoggio1;
+		this.umiditaPrevista = (Long) appoggio2;
 		
 		double percentuale = 100*(Math.abs(umiditaReale-umiditaPrevista))/umiditaReale;
 		
 		if(percentuale>precision) Precisione = false;
 		else Precisione = true;
 		
-		this.valore = percentuale;
+		this.valore = precision;
 		
 	}
 	
@@ -63,7 +69,7 @@ public class StatisticsDailyHumidity {
 		if(percentuale>precision) Precisione = false;
 		else Precisione = true;
 		
-		this.valore = percentuale;
+		this.valore = precision;
 	}
 	
 	//metodo che stampa umidità reale, umidità prevista e dice se le previsioni erano giuste
@@ -71,10 +77,10 @@ public class StatisticsDailyHumidity {
 		
 		if(Precisione == true) return "Umidità attuale: "+ umiditaReale +"\n"
 	                                  + "Umidità secondo le previsioni di ieri: "+ umiditaPrevista +"\n"
-			                          +"Le previsioni erano attendibili con un errore del "+ valore+"%";
+			                          +"Le previsioni erano attendibili con un margine inferiore del "+ valore+"%";
 		else return "Umidità attuale: "+ umiditaReale+"\n"
 	               + "Umidità secondo le previsioni di ieri: "+ umiditaPrevista+"\n"
-			       + "Le previsioni non erano attendibili, errore del "+ valore+"%";
+			       + "Le previsioni non erano attendibili con un margine superiore del "+ valore+"%";
 	}
 	
 	

@@ -146,7 +146,7 @@ public class getDataCity {
 			finale.put("Temperatura percepita", tempF);
 			finale.put("Temperatura massima", tempM);
 			finale.put("Temperatura minima", tempm);
-			finale.put("Umidità", hum);
+			finale.put("Umidita", hum);
 			
 			this.meteo = finale;
 		

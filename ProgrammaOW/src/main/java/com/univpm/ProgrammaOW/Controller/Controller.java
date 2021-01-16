@@ -86,33 +86,34 @@ public class Controller {
 		
 	
 	//metodo che stampa le statistiche giornaliere ricevendo come parametro il nome della città
-	@RequestMapping(value = "/dailyStats/{precision}/{cityName}",method = RequestMethod.POST)
+	@GetMapping(value = "/dailyStats")
 	
 	
-	public String DailyStatsCityName(@RequestBody String tipo,@RequestParam(value = "precision",defaultValue = 5) double precision,@RequestParam(value = "cityName") String cityName) {
+	public String DailyStatsCityName(@RequestParam(name = "tipo") String tipo,@RequestParam(name = "precision",defaultValue = "5") String precision,@RequestParam(name = "cityName") String cityName) {
 		
 		String result = " ";//variabile d'appoggio per il valore di ritorno
+		double precision1 = Double.parseDouble(precision);		
 		
 		switch(tipo){
 		    //stampa le statistiche giornaliere relative alla temperatura
-			case "temperature": {
+			/*case "temperature": {
 			
-			StatisticsDailyTemperature DailyTemperature = new StatisticsDailyTemperature(cityName, precision);
+			StatisticsDailyTemperature DailyTemperature = new StatisticsDailyTemperature(cityName, precision1);
 			result = DailyTemperature.toString();
 			break;
-			}
+			}*/
 			//stampa le statistiche giornaliere relative all'umidità
 			case "humidity" : {
 			
-			StatisticsDailyHumidity DailyHumidity = new StatisticsDailyHumidity(cityName,precision);
+			StatisticsDailyHumidity DailyHumidity = new StatisticsDailyHumidity(cityName,precision1);
 			result = DailyHumidity.toString();
 			break;
 			
 			}
 			//stampa le statistiche giornaliere disponibili(temperatura e umidità)
-			case "all": {
+			/*case "all": {
 				
-			StatisticsDailyTemperature DailyTemperature = new StatisticsDailyTemperature(cityName,precision);
+			StatisticsDailyTemperature DailyTemperature = new StatisticsDailyTemperature(cityName,precision1);
 			StatisticsDailyHumidity DailyHumidity = new StatisticsDailyHumidity(cityName,precision);
 			result = 	DailyTemperature.toString()+DailyHumidity.toString();
 				
@@ -121,14 +122,14 @@ public class Controller {
 			//come valore di default mettiamo le statistiche della temperatura
 			default :{ 
 			
-	        StatisticsDailyTemperature DailyTemperature = new StatisticsDailyTemperature(cityName,precision);
+	        StatisticsDailyTemperature DailyTemperature = new StatisticsDailyTemperature(cityName,precision1);
 			result = DailyTemperature.toString();
 		    break;
-	        }
+	        }*/
 		}
 		return result;
-		}
-	
+		
+	}
 	
 	//metodo che stampa le statistiche settimanali ricevendo come parametro il nome della città
 	@RequestMapping(value = "/weeklyStats/{precision}/{cityName}",method = RequestMethod.POST)
