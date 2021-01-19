@@ -6,8 +6,7 @@ import java.util.Vector;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
-import com.univpm.ProgrammaOW.Utils.getDataCity;
-import com.univpm.ProgrammaOW.Utils.getDataZipCode;
+
 import com.univpm.ProgrammaOW.Utils.getForecast;
 
 

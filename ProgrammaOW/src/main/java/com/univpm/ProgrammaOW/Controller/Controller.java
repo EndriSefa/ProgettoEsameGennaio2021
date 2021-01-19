@@ -96,12 +96,12 @@ public class Controller {
 		
 		switch(tipo){
 		    //stampa le statistiche giornaliere relative alla temperatura
-			/*case "temperature": {
+			case "temperature": {
 			
 			StatisticsDailyTemperature DailyTemperature = new StatisticsDailyTemperature(cityName, precision1);
 			result = DailyTemperature.toString();
 			break;
-			}*/
+			}
 			//stampa le statistiche giornaliere relative all'umidità
 			case "humidity" : {
 			
@@ -111,10 +111,10 @@ public class Controller {
 			
 			}
 			//stampa le statistiche giornaliere disponibili(temperatura e umidità)
-			/*case "all": {
+			case "all": {
 				
 			StatisticsDailyTemperature DailyTemperature = new StatisticsDailyTemperature(cityName,precision1);
-			StatisticsDailyHumidity DailyHumidity = new StatisticsDailyHumidity(cityName,precision);
+			StatisticsDailyHumidity DailyHumidity = new StatisticsDailyHumidity(cityName,precision1);
 			result = 	DailyTemperature.toString()+DailyHumidity.toString();
 				
 			break;
@@ -125,30 +125,29 @@ public class Controller {
 	        StatisticsDailyTemperature DailyTemperature = new StatisticsDailyTemperature(cityName,precision1);
 			result = DailyTemperature.toString();
 		    break;
-	        }*/
+	        }
 		}
 		return result;
 		
 	}
 	
 	//metodo che stampa le statistiche settimanali ricevendo come parametro il nome della città
-	@RequestMapping(value = "/weeklyStats/{precision}/{cityName}",method = RequestMethod.POST)
+	@RequestMapping(value = "/weeklyStats",method = RequestMethod.GET)
 	
-	public String WeeklyStatsCityName(@RequestBody String tipo,@RequestParam(value = "precision") double precision,@RequestParam(value = "cityName") String cityName) {
+	public String WeeklyStatsCityName(@RequestParam(name = "tipo") String tipo,@RequestParam(name = "precision") double precision,@RequestParam(name = "cityName") String cityName) {
 		
 		String result = " ";//variabile d'appoggio per il valore di ritorno
 		
 		
 		switch(tipo){
-			case "temperature": {
 			
-			StatisticsWeeklyTemperature WeeklyTemperature = new StatisticsWeeklyTemperature(cityName,precision);
+			/*StatisticsWeeklyTemperature WeeklyTemperature = new StatisticsWeeklyTemperature(cityName,precision);
 			
 			result = WeeklyTemperature.toString();
 			
 			break;
 			}
-			
+			*/
 			case "humidity" : {
 			
 			StatisticsWeeklyHumidity WeeklyHumidity = new StatisticsWeeklyHumidity(cityName,precision);
@@ -159,7 +158,7 @@ public class Controller {
 			}
 			
 			
-			case "all": {
+			/*case "all": {
 			
 			StatisticsWeeklyTemperature WeeklyTemperature = new StatisticsWeeklyTemperature(predictionsForecast,precision);
 			StatisticsWeeklyHumidity WeeklyHumidity = new StatisticsWeeklyHumidity(cityName,precision);
@@ -177,14 +176,14 @@ public class Controller {
 		     	
 		    break;
 			
-	        }
+	        }*/
 		}
 		return result;
 					
 		}
 	
 	//stampa le statistiche giornaliere ricevendo Zip Code e CountryCode
-	@RequestMapping(value = "/dailyStats/{precision}",method = RequestMethod.POST)
+	@RequestMapping(value = "/dailyStats",method = RequestMethod.POST)
 	
 	public String DailyStatsZipCode(@RequestBody JSONObject URLcomponents, @RequestParam(value = "precision",defaultValue = 5) double precision) {
 		
@@ -232,7 +231,7 @@ public class Controller {
 		}
 	
 	//stampa le statistiche settimanali ricevendo Zip Code e CountryCode
-    @RequestMapping(value = "/weeklyStats/{precision}",method = RequestMethod.POST)
+    @RequestMapping(value = "/weeklyStats",method = RequestMethod.POST)
 	
 	public String WeeklyStatsZipCode(@RequestBody JSONObject URLcomponents,@RequestParam(value = "precision",defaultValue = 5) double precision) {
     	

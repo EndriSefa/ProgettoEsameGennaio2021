@@ -1,5 +1,6 @@
 package com.univpm.ProgrammaOW.Statistics;
 import java.math.*;
+import java.text.DecimalFormat;
 import java.util.Vector;
 
 import org.json.simple.JSONObject;
@@ -10,10 +11,10 @@ import com.univpm.ProgrammaOW.Utils.getDataZipCode;
 
 public class StatisticsDailyHumidity {
 	
-	boolean Precisione;
-	double umiditaReale;
-	double umiditaPrevista;
-	double valore;
+	private boolean Precisione;
+	private double umiditaReale;
+	private double umiditaPrevista;
+	private double valore;
 	
 	//costruttore che prende come parametro il nome della città
 	public StatisticsDailyHumidity(String nomeCitta,double precision) {
@@ -75,12 +76,14 @@ public class StatisticsDailyHumidity {
 	//metodo che stampa umidità reale, umidità prevista e dice se le previsioni erano giuste
 	public String toString() {
 		
+		DecimalFormat df = new DecimalFormat("#.00");
+		
 		if(Precisione == true) return "Umidità attuale: "+ umiditaReale +"\n"
 	                                  + "Umidità secondo le previsioni di ieri: "+ umiditaPrevista +"\n"
-			                          +"Le previsioni erano attendibili con un margine inferiore del "+ valore+"%";
+			                          +"Le previsioni erano attendibili con un margine inferiore del "+ df.format(valore)+"%";
 		else return "Umidità attuale: "+ umiditaReale+"\n"
 	               + "Umidità secondo le previsioni di ieri: "+ umiditaPrevista+"\n"
-			       + "Le previsioni non erano attendibili con un margine superiore del "+ valore+"%";
+			       + "Le previsioni non erano attendibili con un margine superiore del "+ df.format(valore)+"%";
 	}
 	
 	

@@ -1,5 +1,6 @@
 package com.univpm.ProgrammaOW.Statistics;
 
+import java.text.DecimalFormat;
 import java.util.Vector;
 
 import org.json.simple.JSONObject;
@@ -10,12 +11,13 @@ import com.univpm.ProgrammaOW.Utils.getDataZipCode;
 
 public class StatisticsDailyTemperature {
 	
-	boolean Precisione;
-	double temperatura_attuale;
-	double temperatura_prevista;
-	double valore;
-	double media;
-	double varianza;
+	private boolean Precisione;
+	private double temperatura_attuale;
+	private double temperatura_prevista;
+	private double valore;
+	private double media;
+	private double varianza;
+	private double percentualeEffettiva;
 	
 	
 	public StatisticsDailyTemperature(String nomeCitta,double precision) {
@@ -29,29 +31,30 @@ public class StatisticsDailyTemperature {
 		
 		Vector<JSONObject> previsioni = predictions.getPredictions();
 		
-		Number temperatura_attuale = (Number) dailyWeather.get("Temperatura");
-		Number temp_max = (Number) dailyWeather.get("Temperatura massima");
-		Number temp_min = (Number) dailyWeather.get("Temperatura minima");
+		 
+		 
+		 
 		
-		Number temperatura_prevista =(Number) previsioni.firstElement().get("Temperatura");
+		 
 		
 		//per prelevare i numeri facciamo un casting da number a long 
 		//a loro volta ai dati viene fatto un parsing in double 
 		
-		this.temperatura_attuale = (Long) temperatura_attuale;
-		this.temperatura_prevista = (Long) temperatura_prevista;
+		this.temperatura_attuale = (Double) dailyWeather.get("Temperatura");
+		this.temperatura_prevista = (Double) previsioni.firstElement().get("Temperatura");
 		
-		double percentuale = 100*(Math.abs(this.temperatura_attuale-this.temperatura_prevista))/this.temperatura_attuale;
+		double percentuale = 100*Math.abs((this.temperatura_attuale-this.temperatura_prevista)/this.temperatura_attuale);
+		this.percentualeEffettiva = percentuale;
 		
 		if(percentuale>precision) Precisione = false;
 		else Precisione = true;
 		
 		this.valore = precision;
 		
-		Long appoggio1 = (Long) temp_max;
-		Long appoggio2 = (Long) temp_min;
+		double appoggio1 = (Double) dailyWeather.get("Temperatura massima");
+		double appoggio2 = (Double) dailyWeather.get("Temperatura minima");
 		
-		this.media = (double) (appoggio1 + appoggio2)/2;
+		this.media = (appoggio1 + appoggio2)/2;
 		double media_quadratica =Math.pow((Math.pow((double)appoggio1, 2)+Math.pow((double)appoggio2,2))/2,1/2);
 		this.varianza = (double) Math.pow(media, 2)-media_quadratica;
 		
@@ -68,15 +71,13 @@ public class StatisticsDailyTemperature {
 		
 		Vector<JSONObject> previsioni = predictions.getPredictions();
 		
-		Number temperatura_attuale = (Number) dailyWeather.get("Temperatura");
-		Number temp_max = (Number) dailyWeather.get("Temperatura massima");
-		Number temp_min = (Number) dailyWeather.get("Temperatura minima");
-		
-		Number temperatura_prevista =(Number) previsioni.firstElement().get("Temperatura");
+		 
+		 
 		
 		
-		this.temperatura_attuale = (Long) temperatura_attuale;
-		this.temperatura_prevista = (Long) temperatura_prevista;
+		 
+		this.temperatura_attuale = (Long) dailyWeather.get("Temperatura");
+		this.temperatura_prevista = (Long) previsioni.firstElement().get("Temperatura");
 		
 		double percentuale = 100*(Math.abs(this.temperatura_attuale-this.temperatura_prevista))/this.temperatura_attuale;
 		
@@ -85,8 +86,8 @@ public class StatisticsDailyTemperature {
 		
 		this.valore = precision;
 		
-		Long appoggio1 = (Long) temp_max;
-		Long appoggio2 = (Long) temp_min;
+		Long appoggio1 = (Long) dailyWeather.get("Temperatura massima");
+		Long appoggio2 = (Long) dailyWeather.get("Temperatura minima");
 		
 		this.media = (double) (appoggio1 + appoggio2)/2;
 		double media_quadratica =Math.pow((Math.pow((double)appoggio1, 2)+Math.pow((double)appoggio2,2))/2,1/2);
@@ -101,17 +102,21 @@ public class StatisticsDailyTemperature {
 	
 	public String toString() {
 		
-		if(Precisione == true) return "Temperatura attuale: "+ temperatura_attuale +"\n"
-	                                  + "Temperatura secondo le previsioni di ieri: "+ temperatura_prevista +"\n"
-			                          +"Le previsioni erano attendibili con un margine inferiore del "+ valore+"%"+"\n"
-	                                  +"Media: "+media+"\n"
-	                                  +"Varianza"+varianza;
+		DecimalFormat df = new DecimalFormat("#.00");
 		
-		else return "Temperatura attuale: "+ temperatura_attuale+"\n"
+		if(Precisione) return "Temperatura attuale: "+ temperatura_attuale +"\n" 
+							  +"Media: "+df.format(media)+"\n"
+	                          +"Varianza"+df.format(varianza)+ "\n"
+	                          + "Temperatura secondo le previsioni di ieri: "+ temperatura_prevista +"\n"
+			                  +"Le previsioni erano attendibili con un margine inferiore del "+ valore+"% ( "+ df.format(this.percentualeEffettiva) + ")"+"\n"
+	                                 ;
+		
+		else return "Temperatura attuale: "+ temperatura_attuale+"\n" 
+				   +"Media: "+df.format(media)+"\n"
+                   +"Varianza: "+df.format(varianza) +"\n"
 	               + "Temperatura secondo le previsioni di ieri: "+ temperatura_prevista+"\n"
-			       + "Le previsioni non erano attendibili con un margine superiore del "+ valore+"%"+"\n"
-		           +"Media: "+media+"\n"
-                   +"Varianza"+varianza;
+			       + "Le previsioni non erano attendibili con un margine superiore del "+ valore+"% ( "+df.format(this.percentualeEffettiva) + ")"+"\n"
+		          ;
 	}
 	
 	
