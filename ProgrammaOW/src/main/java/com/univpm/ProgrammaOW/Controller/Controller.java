@@ -1,14 +1,14 @@
 package com.univpm.ProgrammaOW.Controller;
 
 import java.util.Vector;
-import java.util.concurrent.locks.AbstractQueuedLongSynchronizer.ConditionObject;
 
-import com.univpm.ProgrammaOW.Utils.*;
+
+
 import com.univpm.ProgrammaOW.Filters.*;
 import com.univpm.ProgrammaOW.Statistics.*;
 
 import org.json.simple.JSONObject;
-import org.springframework.http.ResponseEntity;
+
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.univpm.ProgrammaOW.Utils.getDataCity;
 import com.univpm.ProgrammaOW.Utils.getDataZipCode;
 
-import com.fasterxml.jackson.databind.util.JSONPObject;
+
 
 @RestController
 public class Controller {
@@ -115,7 +115,7 @@ public class Controller {
 				
 			StatisticsDailyTemperature DailyTemperature = new StatisticsDailyTemperature(cityName,precision1);
 			StatisticsDailyHumidity DailyHumidity = new StatisticsDailyHumidity(cityName,precision1);
-			result = 	DailyTemperature.toString()+DailyHumidity.toString();
+			result = 	DailyTemperature.toString()+"\n"+DailyHumidity.toString();
 				
 			break;
 			}
@@ -134,23 +134,26 @@ public class Controller {
 	//metodo che stampa le statistiche settimanali ricevendo come parametro il nome della città
 	@RequestMapping(value = "/weeklyStats",method = RequestMethod.GET)
 	
-	public String WeeklyStatsCityName(@RequestParam(name = "tipo") String tipo,@RequestParam(name = "precision") double precision,@RequestParam(name = "cityName") String cityName) {
+	public String WeeklyStatsCityName(@RequestParam(name = "tipo") String tipo,@RequestParam(name = "precision", defaultValue = "5") String precision,@RequestParam(name = "cityName") String cityName) {
 		
 		String result = " ";//variabile d'appoggio per il valore di ritorno
+		double precision1 = Double.parseDouble(precision);
 		
 		
 		switch(tipo){
 			
-			/*StatisticsWeeklyTemperature WeeklyTemperature = new StatisticsWeeklyTemperature(cityName,precision);
+		case "temperature" :{
+		
+			StatisticsWeeklyTemperature WeeklyTemperature = new StatisticsWeeklyTemperature(cityName,precision1);
 			
 			result = WeeklyTemperature.toString();
 			
 			break;
 			}
-			*/
+			
 			case "humidity" : {
 			
-			StatisticsWeeklyHumidity WeeklyHumidity = new StatisticsWeeklyHumidity(cityName,precision);
+			StatisticsWeeklyHumidity WeeklyHumidity = new StatisticsWeeklyHumidity(cityName,precision1);
 			
 			result = WeeklyHumidity.toString();
 			
@@ -158,25 +161,25 @@ public class Controller {
 			}
 			
 			
-			/*case "all": {
+			case "all": {
 			
-			StatisticsWeeklyTemperature WeeklyTemperature = new StatisticsWeeklyTemperature(predictionsForecast,precision);
-			StatisticsWeeklyHumidity WeeklyHumidity = new StatisticsWeeklyHumidity(cityName,precision);
+			StatisticsWeeklyTemperature WeeklyTemperature = new StatisticsWeeklyTemperature(cityName,precision1);
+			StatisticsWeeklyHumidity WeeklyHumidity = new StatisticsWeeklyHumidity(cityName,precision1);
 				
-			result = WeeklyTemperature.toString()+WeeklyHumidity.toString();
+			result = WeeklyTemperature.toString()+"\n"+WeeklyHumidity.toString();
 			
 			break;
 			}
 			
 			default : { 
 			
-			StatisticsWeeklyTemperature WeeklyTemperature = new StatisticsWeeklyTemperature(predictionsForecast,precision);
+			StatisticsWeeklyTemperature WeeklyTemperature = new StatisticsWeeklyTemperature(cityName,precision1);
 			
 			result = WeeklyTemperature.toString();
 		     	
 		    break;
 			
-	        }*/
+	        }
 		}
 		return result;
 					
@@ -185,11 +188,11 @@ public class Controller {
 	//stampa le statistiche giornaliere ricevendo Zip Code e CountryCode
 	@RequestMapping(value = "/dailyStats",method = RequestMethod.POST)
 	
-	public String DailyStatsZipCode(@RequestBody JSONObject URLcomponents, @RequestParam(value = "precision",defaultValue = 5) double precision) {
+	public String DailyStatsZipCode(@RequestBody JSONObject URLcomponents,@RequestParam (name = "tipo") String tipo, @RequestParam(name = "precision",defaultValue = "5") String precision) {
 		
 		String zip = (String) URLcomponents.get("zipCode");
 		String country = (String) URLcomponents.get("countryCode");
-		String tipo = (String) URLcomponents.get("tipo");
+		double precision1 = Double.parseDouble(precision);
 		
         String result = " ";//variabile d'appoggio per il valore di ritorno
 		
@@ -198,14 +201,14 @@ public class Controller {
 		    //stampa le statistiche giornaliere relative alla temperatura
 			case "temperature": {
 			
-			StatisticsDailyTemperature DailyTemperature = new StatisticsDailyTemperature(zip,country,precision);
+			StatisticsDailyTemperature DailyTemperature = new StatisticsDailyTemperature(zip,country,precision1);
 			result = DailyTemperature.toString();
 			break;
 			}
 			//stampa le statistiche giornaliere relative all'umidità
 			case "humidity" : {
 			
-			StatisticsDailyHumidity DailyHumidity = new StatisticsDailyHumidity(zip,country,precision);
+			StatisticsDailyHumidity DailyHumidity = new StatisticsDailyHumidity(zip,country,precision1);
 			result = DailyHumidity.toString();
 			break;
 			
@@ -213,16 +216,16 @@ public class Controller {
 			//stampa le statistiche giornaliere disponibili(temperatura e umidità)
 			case "all": {
 				
-			StatisticsDailyTemperature DailyTemperature = new StatisticsDailyTemperature(predictions,precision);
-			StatisticsDailyHumidity DailyHumidity = new StatisticsDailyHumidity(zip,country,precision);
-			result = 	DailyTemperature.toString()+DailyHumidity.toString();
+			StatisticsDailyTemperature DailyTemperature = new StatisticsDailyTemperature(zip, country,precision1);
+			StatisticsDailyHumidity DailyHumidity = new StatisticsDailyHumidity(zip,country,precision1);
+			result = 	DailyTemperature.toString()+"\n"+DailyHumidity.toString();
 				
 			break;
 			}
 			//come valore di default mettiamo le statistiche della temperatura
 			default :{ 
 			
-	        StatisticsDailyTemperature DailyTemperature = new StatisticsDailyTemperature(predictions,precision);
+	        StatisticsDailyTemperature DailyTemperature = new StatisticsDailyTemperature(zip, country,precision1);
 			result = DailyTemperature.toString();
 		    break;
 	        }
@@ -233,11 +236,11 @@ public class Controller {
 	//stampa le statistiche settimanali ricevendo Zip Code e CountryCode
     @RequestMapping(value = "/weeklyStats",method = RequestMethod.POST)
 	
-	public String WeeklyStatsZipCode(@RequestBody JSONObject URLcomponents,@RequestParam(value = "precision",defaultValue = 5) double precision) {
+	public String WeeklyStatsZipCode(@RequestBody JSONObject URLcomponents,@RequestParam (name = "tipo", defaultValue = "5") String tipo, @RequestParam(name = "precision",defaultValue = "5") String precision) {
     	
     	String zip = (String) URLcomponents.get("zipCode");
 		String country = (String) URLcomponents.get("countryCode");
-		String tipo = (String) URLcomponents.get("tipo");
+		double precision1 = Double.parseDouble(precision);
 		
 		String result = " ";//variabile d'appoggio per il valore di ritorno
 		
@@ -247,7 +250,7 @@ public class Controller {
 			
 		    case "temperature": {
 			
-			StatisticsWeeklyTemperature WeeklyTemperature = new StatisticsWeeklyTemperature(zip,country,precision);
+			StatisticsWeeklyTemperature WeeklyTemperature = new StatisticsWeeklyTemperature(zip,country,precision1);
 			
 			result = WeeklyTemperature.toString();
 			
@@ -256,7 +259,7 @@ public class Controller {
 			
 			case "humidity" : {
 			
-			StatisticsWeeklyHumidity WeeklyHumidity = new StatisticsWeeklyHumidity(zip,country,precision);//stesso dubbio di sopra
+			StatisticsWeeklyHumidity WeeklyHumidity = new StatisticsWeeklyHumidity(zip,country,precision1);//stesso dubbio di sopra
 			
 			result = WeeklyHumidity.toString();
 			
@@ -266,17 +269,17 @@ public class Controller {
 			
 			case "all": {
 			
-			StatisticsWeeklyTemperature WeeklyTemperature = new StatisticsWeeklyTemperature(zip,country,precision);
-			StatisticsWeeklyHumidity WeeklyHumidity = new StatisticsWeeklyHumidity(zip,country,precision);
+			StatisticsWeeklyTemperature WeeklyTemperature = new StatisticsWeeklyTemperature(zip,country,precision1);
+			StatisticsWeeklyHumidity WeeklyHumidity = new StatisticsWeeklyHumidity(zip,country,precision1);
 				
-			result = WeeklyTemperature.toString()+WeeklyHumidity.toString();
+			result = WeeklyTemperature.toString()+"\n" +WeeklyHumidity.toString();
 			
 			break;
 			}
 			
 			default : { 
 			
-			StatisticsWeeklyTemperature WeeklyTemperature = new StatisticsWeeklyTemperature(zip,country,precision);
+			StatisticsWeeklyTemperature WeeklyTemperature = new StatisticsWeeklyTemperature(zip,country,precision1);
 			
 			result = WeeklyTemperature.toString();
 		     	

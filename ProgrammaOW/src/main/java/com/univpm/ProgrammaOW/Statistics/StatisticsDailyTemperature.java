@@ -18,6 +18,9 @@ public class StatisticsDailyTemperature {
 	private double media;
 	private double varianza;
 	private double percentualeEffettiva;
+	private double temperaturaMassima;
+	private double temperaturaMinima;
+	
 	
 	
 	public StatisticsDailyTemperature(String nomeCitta,double precision) {
@@ -31,6 +34,8 @@ public class StatisticsDailyTemperature {
 		
 		Vector<JSONObject> previsioni = predictions.getPredictions();
 		
+		
+		
 		 
 		 
 		 
@@ -40,8 +45,11 @@ public class StatisticsDailyTemperature {
 		//per prelevare i numeri facciamo un casting da number a long 
 		//a loro volta ai dati viene fatto un parsing in double 
 		
-		this.temperatura_attuale = (Double) dailyWeather.get("Temperatura");
-		this.temperatura_prevista = (Double) previsioni.firstElement().get("Temperatura");
+		Number app = (Number) dailyWeather.get("Temperatura");
+		
+		this.temperatura_attuale = app.doubleValue() ;
+		app = (Number)previsioni.firstElement().get("Temperatura");
+		this.temperatura_prevista =  app.doubleValue();
 		
 		double percentuale = 100*Math.abs((this.temperatura_attuale-this.temperatura_prevista)/this.temperatura_attuale);
 		this.percentualeEffettiva = percentuale;
@@ -51,12 +59,19 @@ public class StatisticsDailyTemperature {
 		
 		this.valore = precision;
 		
-		double appoggio1 = (Double) dailyWeather.get("Temperatura massima");
-		double appoggio2 = (Double) dailyWeather.get("Temperatura minima");
+		app = (Number)dailyWeather.get("Temperatura massima");
 		
-		this.media = (appoggio1 + appoggio2)/2;
-		double media_quadratica =Math.pow((Math.pow((double)appoggio1, 2)+Math.pow((double)appoggio2,2))/2,1/2);
-		this.varianza = (double) Math.pow(media, 2)-media_quadratica;
+		this.temperaturaMassima =  app.doubleValue();
+		
+		app = (Number)dailyWeather.get("Temperatura minima");
+		this.temperaturaMinima = app.doubleValue();
+		
+		this.media = (this.temperaturaMassima + this.temperaturaMinima)/2;
+		double media_quadratica =Math.pow((Math.pow(this.temperaturaMassima, 2)+Math.pow(this.temperaturaMinima,2))/2,1/2);
+		this.varianza = Math.pow(media, 2)-media_quadratica;
+		
+		
+		
 		
 	}
 	
@@ -72,27 +87,30 @@ public class StatisticsDailyTemperature {
 		Vector<JSONObject> previsioni = predictions.getPredictions();
 		
 		 
-		 
+		Number app = (Number) dailyWeather.get("Temperatura");
 		
+		this.temperatura_attuale = app.doubleValue() ;
+		app = (Number)previsioni.firstElement().get("Temperatura");
+		this.temperatura_prevista =  app.doubleValue();
 		
-		 
-		this.temperatura_attuale = (Long) dailyWeather.get("Temperatura");
-		this.temperatura_prevista = (Long) previsioni.firstElement().get("Temperatura");
-		
-		double percentuale = 100*(Math.abs(this.temperatura_attuale-this.temperatura_prevista))/this.temperatura_attuale;
+		double percentuale = 100*Math.abs((this.temperatura_attuale-this.temperatura_prevista)/this.temperatura_attuale);
+		this.percentualeEffettiva = percentuale;
 		
 		if(percentuale>precision) Precisione = false;
 		else Precisione = true;
 		
 		this.valore = precision;
 		
-		Long appoggio1 = (Long) dailyWeather.get("Temperatura massima");
-		Long appoggio2 = (Long) dailyWeather.get("Temperatura minima");
+		app = (Number)dailyWeather.get("Temperatura massima");
 		
-		this.media = (double) (appoggio1 + appoggio2)/2;
-		double media_quadratica =Math.pow((Math.pow((double)appoggio1, 2)+Math.pow((double)appoggio2,2))/2,1/2);
-		this.varianza = (double) Math.pow(media, 2)-media_quadratica;
+		this.temperaturaMassima =  app.doubleValue();
 		
+		app = (Number)dailyWeather.get("Temperatura minima");
+		this.temperaturaMinima = app.doubleValue();
+		
+		this.media = (this.temperaturaMassima + this.temperaturaMinima)/2;
+		double media_quadratica =Math.pow((Math.pow(this.temperaturaMassima, 2)+Math.pow(this.temperaturaMinima,2))/2,1/2);
+		this.varianza = Math.pow(media, 2)-media_quadratica;
 		
 		
 		
@@ -104,18 +122,22 @@ public class StatisticsDailyTemperature {
 		
 		DecimalFormat df = new DecimalFormat("#.00");
 		
-		if(Precisione) return "Temperatura attuale: "+ temperatura_attuale +"\n" 
+		if(Precisione) return "Temperatura attuale: "+ df.format(this.temperatura_attuale) +"\n" +
+							"Temperatura Massima: " + df.format(this.temperaturaMassima) + 
+							"\t Temperatura Minima: " + df.format(this.temperaturaMinima) + "\n"
 							  +"Media: "+df.format(media)+"\n"
 	                          +"Varianza"+df.format(varianza)+ "\n"
-	                          + "Temperatura secondo le previsioni di ieri: "+ temperatura_prevista +"\n"
-			                  +"Le previsioni erano attendibili con un margine inferiore del "+ valore+"% ( "+ df.format(this.percentualeEffettiva) + ")"+"\n"
+	                          + "Temperatura secondo le previsioni di ieri: "+ df.format(temperatura_prevista) +"\n"
+			                  +"Le previsioni erano attendibili con un margine inferiore del "+ valore+"% ( "+ df.format(this.percentualeEffettiva) + "%)"+"\n"
 	                                 ;
 		
-		else return "Temperatura attuale: "+ temperatura_attuale+"\n" 
-				   +"Media: "+df.format(media)+"\n"
+		else return "Temperatura attuale: "+ df.format(this.temperatura_attuale)+"\n" 
+				+"Temperatura Massima: " + df.format(this.temperaturaMassima) + 
+				"\t Temperatura Minima: " + df.format(this.temperaturaMinima) + "\n"
+				   +"Temperatura Media: "+df.format(media)+"\t"
                    +"Varianza: "+df.format(varianza) +"\n"
-	               + "Temperatura secondo le previsioni di ieri: "+ temperatura_prevista+"\n"
-			       + "Le previsioni non erano attendibili con un margine superiore del "+ valore+"% ( "+df.format(this.percentualeEffettiva) + ")"+"\n"
+	               + "Temperatura secondo le previsioni di ieri: "+ df.format(temperatura_prevista)+"\n"
+			       + "Le previsioni non erano attendibili con un margine superiore del "+ valore+"% ( "+df.format(this.percentualeEffettiva) + "%)"+"\n"
 		          ;
 	}
 	

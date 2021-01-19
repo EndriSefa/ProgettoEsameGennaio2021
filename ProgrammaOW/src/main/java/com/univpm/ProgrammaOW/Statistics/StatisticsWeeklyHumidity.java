@@ -1,6 +1,6 @@
 package com.univpm.ProgrammaOW.Statistics;
 
-import java.math.*;
+
 import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.time.ZoneId;
@@ -88,7 +88,7 @@ public class StatisticsWeeklyHumidity {
 		
 		risultato +="Umidità attuale: "+ umiditaReale + "\n";
 		
-		int cont = 0;
+		
 		for( JSONObject o : previsioni ) {
 			
 			DecimalFormat df = new DecimalFormat("#.00");
