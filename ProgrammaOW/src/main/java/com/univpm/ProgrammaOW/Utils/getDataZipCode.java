@@ -125,7 +125,7 @@ public class getDataZipCode {
 			finale.put("Temperatura percepita", tempF);
 			finale.put("Temperatura massima", tempM);
 			finale.put("Temperatura minima", tempm);
-			finale.put("Umidità", hum);
+			finale.put("Umidita", hum);
 			
 			meteo = finale;
 		

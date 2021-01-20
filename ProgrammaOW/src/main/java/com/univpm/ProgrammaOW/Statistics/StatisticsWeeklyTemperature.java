@@ -50,16 +50,16 @@ public class StatisticsWeeklyTemperature {
 		this.temperaturaMinima = app.doubleValue() ;
 		
 		this.media =  (this.temperaturaMassima + this.temperaturaMinima)/2;
-		double media_quadratica =Math.pow((Math.pow(this.temperaturaMassima, 2)+Math.pow(this.temperaturaMinima,2))/2,1/2);
-		this.varianza =  Math.pow(media, 2)-media_quadratica;
+		
+		this.varianza =  (Math.pow(this.temperaturaMassima-media, 2)+Math.pow(this.temperaturaMinima-media, 2))/2;
 		
 		
 		
 		risultato ="Città: " + citta + "\nData di oggi: " + data_oggi + "\n";
 		
 		risultato +="Temperatura attuale: "+ df.format(this.temperatura_attuale) + "\n"
-					+ "Temperatura massima: " + df.format(this.temperaturaMassima) + "\n"+
-				"Temperatura minima: " + df.format(this.temperaturaMinima) + "\t" +
+					+ "Temperatura massima: " + df.format(this.temperaturaMassima) + "\t"+
+				"Temperatura minima: " + df.format(this.temperaturaMinima) + "\n" +
 					"Temperatura media: " + df.format(this.media) + "\t Varianza: " + df.format(this.varianza) + "\n\n";
 						;
 		
@@ -121,8 +121,8 @@ public StatisticsWeeklyTemperature(String zipCode,String countryCode, double pre
 		this.temperaturaMinima = app.doubleValue() ;
 		
 		this.media =  (this.temperaturaMassima + this.temperaturaMinima)/2;
-		double media_quadratica =Math.pow((Math.pow(this.temperaturaMassima, 2)+Math.pow(this.temperaturaMinima,2))/2,1/2);
-		this.varianza =  Math.pow(media, 2)-media_quadratica;
+		
+		this.varianza =  (Math.pow(this.temperaturaMassima-media, 2)+Math.pow(this.temperaturaMinima-media, 2))/2;
 		
 		
 		
@@ -152,11 +152,11 @@ public StatisticsWeeklyTemperature(String zipCode,String countryCode, double pre
 		
 			if(percentuale <= precision) risultato += 
                "Temperatura secondo le previsioni del " +data +": "+ df.format(temperatura_prevista) +"\n"
-              +"Le previsioni erano attendibili con un margine inferiore del "+ valore+"% ( "+ df.format(percentuale) + ")"+"\n"
+              +"Le previsioni erano attendibili con un margine inferiore del "+ valore+"% ( "+ df.format(percentuale) + ")"+"\n\n"
                      ;
 
 				else  risultato +=  "Temperatura secondo le previsioni del " + data +": "+ df.format(temperatura_prevista)+"\n"
-						+ "Le previsioni non erano attendibili con un margine superiore del "+ valore+"% ( "+df.format(percentuale) + ")"+"\n";
+						+ "Le previsioni non erano attendibili con un margine superiore del "+ valore+"% ( "+df.format(percentuale) + ")"+"\n\n";
 		
 			}
 		

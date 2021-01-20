@@ -67,8 +67,8 @@ public class StatisticsDailyTemperature {
 		this.temperaturaMinima = app.doubleValue();
 		
 		this.media = (this.temperaturaMassima + this.temperaturaMinima)/2;
-		double media_quadratica =Math.pow((Math.pow(this.temperaturaMassima, 2)+Math.pow(this.temperaturaMinima,2))/2,1/2);
-		this.varianza = Math.pow(media, 2)-media_quadratica;
+		
+		this.varianza = (Math.pow(this.temperaturaMassima-media, 2)+Math.pow(this.temperaturaMinima-media, 2))/2;
 		
 		
 		
@@ -109,8 +109,8 @@ public class StatisticsDailyTemperature {
 		this.temperaturaMinima = app.doubleValue();
 		
 		this.media = (this.temperaturaMassima + this.temperaturaMinima)/2;
-		double media_quadratica =Math.pow((Math.pow(this.temperaturaMassima, 2)+Math.pow(this.temperaturaMinima,2))/2,1/2);
-		this.varianza = Math.pow(media, 2)-media_quadratica;
+		
+		this.varianza = (Math.pow(this.temperaturaMassima-media, 2)+Math.pow(this.temperaturaMinima-media, 2))/2;
 		
 		
 		
@@ -125,8 +125,8 @@ public class StatisticsDailyTemperature {
 		if(Precisione) return "Temperatura attuale: "+ df.format(this.temperatura_attuale) +"\n" +
 							"Temperatura Massima: " + df.format(this.temperaturaMassima) + 
 							"\t Temperatura Minima: " + df.format(this.temperaturaMinima) + "\n"
-							  +"Media: "+df.format(media)+"\n"
-	                          +"Varianza"+df.format(varianza)+ "\n"
+							  +"Media: "+df.format(media)+'\t'
+	                          +"Varianza: "+df.format(varianza)+ "\n"
 	                          + "Temperatura secondo le previsioni di ieri: "+ df.format(temperatura_prevista) +"\n"
 			                  +"Le previsioni erano attendibili con un margine inferiore del "+ valore+"% ( "+ df.format(this.percentualeEffettiva) + "%)"+"\n"
 	                                 ;

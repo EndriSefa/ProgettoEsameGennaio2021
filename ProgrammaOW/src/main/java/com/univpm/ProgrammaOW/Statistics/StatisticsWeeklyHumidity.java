@@ -31,32 +31,37 @@ public class StatisticsWeeklyHumidity {
 		
 		Vector<JSONObject> previsioni = getWeeklyForecast.getForecast();
 		
-		this.umiditaReale = (Long) dailyWeather.get("Umidita");
+		DecimalFormat df = new DecimalFormat("#.00");
+		Number app = (Number)dailyWeather.get("Umidita");
+		
+		this.umiditaReale = app.doubleValue();
 		String data_oggi = (String) dailyWeather.get("Data");
 		
 		risultato = "Data di oggi: " + data_oggi + "\n";
 		
-		risultato +="Umidità attuale: "+ umiditaReale + "\n"+"\n";
+		risultato +="Umidità attuale: "+ df.format(umiditaReale) + "\n"+"\n";
 		
 		//contatore per i giorni delle previsioni
 		int i=1
 				;
 		for(JSONObject o : previsioni) {
 			
-			DecimalFormat df = new DecimalFormat("#.00");
+			
 			
 			
 			LocalDate data = LocalDate.now( ZoneId.of( "Europe/Rome" ) ).minusDays( i );
 			i++;
-	        double umiditaPrevista = (Long)o.get("Umidita");
+			
+			app = (Number)o.get("Umidita");
+	        double umiditaPrevista = app.doubleValue();
 			double percentuale = 100*(Math.abs(umiditaReale-umiditaPrevista))/umiditaReale;
 			if(percentuale <= precision) { 
 			                              risultato+= "Giorno in cui è stata fatta la previsione : "+data+"\n"
-			                                       + "Umidità prevista: "+ umiditaPrevista+"\n"
+			                                       + "Umidità prevista: "+ df.format(umiditaPrevista)+"\n"
 			                                       +"Le previsioni del giorno erano attendibili con un margine inferiore del "+ valore+"% ( "+ df.format(percentuale) +"%)" + "\n";}
 			else {
 			      risultato+="Giorno: "+data+"\n"
-			      +"Umidità prevista: "+ umiditaPrevista+"\n"
+			      +"Umidità prevista: "+ df.format(umiditaPrevista)+"\n"
 			      +"Le previsioni del giorno non erano attendibili con un margine superiore del "+ valore+"% ( "+ df.format(percentuale) +"%)" + "\n";
 			     }
 			risultato += "\n";
@@ -80,33 +85,42 @@ public class StatisticsWeeklyHumidity {
 		
 		Vector<JSONObject> previsioni = getWeeklyForecast.getForecast();
 		
-		this.umiditaReale = (double) dailyWeather.get("Umidita");
+		DecimalFormat df = new DecimalFormat("#.00");
+		Number app = (Number)dailyWeather.get("Umidita");
+		
+		this.umiditaReale = app.doubleValue();
 		
 		String data_oggi = (String) dailyWeather.get("Data");
 		
-		risultato += "Data di oggi: " + data_oggi;
+risultato = "Data di oggi: " + data_oggi + "\n";
 		
-		risultato +="Umidità attuale: "+ umiditaReale + "\n";
+		risultato +="Umidità attuale: "+ df.format(umiditaReale) + "\n"+"\n";
 		
-		
-		for( JSONObject o : previsioni ) {
+		//contatore per i giorni delle previsioni
+		int i=1
+				;
+		for(JSONObject o : previsioni) {
 			
-			DecimalFormat df = new DecimalFormat("#.00");
 			
-			int i=1;
+			
+			
 			LocalDate data = LocalDate.now( ZoneId.of( "Europe/Rome" ) ).minusDays( i );
-	        double umiditaPrevista = (double)o.get("Umidita");
+			i++;
+			
+			app = (Number)o.get("Umidita");
+	        double umiditaPrevista = app.doubleValue();
 			double percentuale = 100*(Math.abs(umiditaReale-umiditaPrevista))/umiditaReale;
 			if(percentuale <= precision) { 
-			                              risultato+= "Giorno della previsione di oggi: "+data+"\n"
-			                                       + "Umidità prevista: "+ umiditaPrevista+"\n"
-			                                       +"Le previsioni del giorno erano attendibili con un margine inferiore del "+ valore +"% (" + df.format(percentuale) + ")\n";}
+			                              risultato+= "Giorno in cui è stata fatta la previsione : "+data+"\n"
+			                                       + "Umidità prevista: "+ df.format(umiditaPrevista)+"\n"
+			                                       +"Le previsioni del giorno erano attendibili con un margine inferiore del "+ valore+"% ( "+ df.format(percentuale) +"%)" + "\n";}
 			else {
 			      risultato+="Giorno: "+data+"\n"
-			      +"Umidità prevista: "+ umiditaPrevista+"\n"
-			      +"Le previsioni del giorno non erano attendibili con un margine superiore del "+ valore+"% (" + df.format(percentuale) + ")\n";
+			      +"Umidità prevista: "+ df.format(umiditaPrevista)+"\n"
+			      +"Le previsioni del giorno non erano attendibili con un margine superiore del "+ valore+"% ( "+ df.format(percentuale) +"%)" + "\n";
 			     }
-			i++;
+			risultato += "\n";
+			
 		}
 	}
 	

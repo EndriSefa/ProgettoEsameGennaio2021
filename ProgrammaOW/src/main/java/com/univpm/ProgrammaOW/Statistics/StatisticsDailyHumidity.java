@@ -15,6 +15,7 @@ public class StatisticsDailyHumidity {
 	private double umiditaReale;
 	private double umiditaPrevista;
 	private double valore;
+	private double percentuale;
 	
 	//costruttore che prende come parametro il nome della città
 	public StatisticsDailyHumidity(String nomeCitta,double precision) {
@@ -39,10 +40,10 @@ public class StatisticsDailyHumidity {
 		//per prelevare i numeri facciamo un casting da number a long 
 		//a loro volta ai dati viene fatto un parsing in double 
 		
-		this.umiditaReale = (Long) appoggio1;
-		this.umiditaPrevista = (Long) appoggio2;
-		
-		double percentuale = 100*(Math.abs(umiditaReale-umiditaPrevista))/umiditaReale;
+		this.umiditaReale =  appoggio1.doubleValue();
+		this.umiditaPrevista =  appoggio2.doubleValue();
+	
+		this.percentuale = 100*(Math.abs(umiditaReale-umiditaPrevista))/umiditaReale;
 		
 		if(percentuale>precision) Precisione = false;
 		else Precisione = true;
@@ -62,10 +63,13 @@ public class StatisticsDailyHumidity {
 		
 		Vector<JSONObject> previsioni = predictions.getPredictions();
 		
-		this.umiditaReale = (double) dailyWeather.get("Umidita");
-		this.umiditaPrevista=(double) previsioni.firstElement().get("Umidita");
+		Number app = (Number)dailyWeather.get("Umidita");
 		
-		double percentuale = 100*(Math.abs(umiditaReale-umiditaPrevista))/umiditaReale;
+		this.umiditaReale = app.doubleValue();
+		app = (Number)previsioni.firstElement().get("Umidita");
+		this.umiditaPrevista= app.doubleValue();
+		
+		this.percentuale = 100*(Math.abs(umiditaReale-umiditaPrevista))/umiditaReale;
 		
 		if(percentuale>precision) Precisione = false;
 		else Precisione = true;
@@ -78,12 +82,12 @@ public class StatisticsDailyHumidity {
 		
 		DecimalFormat df = new DecimalFormat("#.00");
 		
-		if(Precisione == true) return "Umidità attuale: "+ umiditaReale +"\n"
-	                                  + "Umidità secondo le previsioni di ieri: "+ umiditaPrevista +"\n"
-			                          +"Le previsioni erano attendibili con un margine inferiore del "+ df.format(valore)+"%";
-		else return "Umidità attuale: "+ umiditaReale+"\n"
-	               + "Umidità secondo le previsioni di ieri: "+ umiditaPrevista+"\n"
-			       + "Le previsioni non erano attendibili con un margine superiore del "+ df.format(valore)+"%";
+		if(Precisione == true) return "Umidità attuale: "+ df.format(umiditaReale) +"\n"
+	                                  + "Umidità secondo le previsioni di ieri: "+ df.format(umiditaPrevista) +"\n"
+			                          +"Le previsioni erano attendibili con un margine inferiore del "+ valore+"% ("+ df.format(this.percentuale)+"%)";
+		else return "Umidità attuale: "+ df.format(umiditaReale)+"\n"
+	               + "Umidità secondo le previsioni di ieri: "+ df.format(umiditaPrevista)+"\n"
+			       + "Le previsioni non erano attendibili con un margine superiore del "+ valore+"% ("+ df.format(this.percentuale) +"%)";
 	}
 	
 	
