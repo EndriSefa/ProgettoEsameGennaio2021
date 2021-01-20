@@ -18,15 +18,17 @@ import com.univpm.ProgrammaOW.Exceptions.NonExistingPredictionDataException;
 
 class TestExceptions {
 	
-	getDataZipCode c1;
-	StatisticsDailyHumidity c2;
-	getWeatherPredictions c3;
+	private getDataZipCode c1;
+	private StatisticsDailyHumidity c2;
+	private getWeatherPredictions c3;
+	
+    private	getDataZipCode parametro;
 
 	@BeforeEach
 	void setUp() throws Exception {
-		/*c3 = new getWeatherPredictions() questo lo inizializzo prima perchè l'eccezione sta nel metodo, ma dobbiamo inizializzarlo con un JSONObject 
-		 * tale da far partire l'eccezione
-		 */
+		//60020 cap sirolo
+		parametro = new getDataZipCode("60020","it");
+		c3 = new getWeatherPredictions(parametro.getMeteo());
 	}
 
 	@AfterEach
@@ -39,7 +41,7 @@ class TestExceptions {
 		
 		InvalidPrecisionException exception = assertThrows(InvalidPrecisionException.class,() -> {c2 = new StatisticsDailyHumidity("Londra",-5.0);});
 
-		assertEquals("La percentuale inserita non è valida...", exception.getMessage());
+		
 	}
 	
 	@Test
@@ -48,7 +50,7 @@ class TestExceptions {
 		
 		InvalidZipCodeException exception = assertThrows(InvalidZipCodeException.class,() -> { c1 = new getDataZipCode("1234","5678");});
 		
-		assertEquals("Lo Zip Code inserito non risulta valido...",exception.getMessage());
+		
 	}
 	
 	@Test
@@ -57,7 +59,7 @@ class TestExceptions {
 		
 		NonExistingPredictionDataException exception = assertThrows(NonExistingPredictionDataException.class,() -> { c3.getPredictions();});
 		
-		assertEquals("Dati relativi alle previsioni passate non presenti...", exception.getMessage());
+	
 	}
 	
 
