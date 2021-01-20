@@ -7,6 +7,7 @@ import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Vector;
 import com.univpm.ProgrammaOW.Exceptions.InvalidPrecisionException;
+import com.univpm.ProgrammaOW.Exceptions.InvalidZipCodeException;
 
 import org.json.simple.JSONObject;
 
@@ -78,7 +79,7 @@ public class StatisticsWeeklyHumidity {
 		
 	}
 	
-	public StatisticsWeeklyHumidity(String ZipCode, String CountryCode,double precision) throws InvalidPrecisionException{
+	public StatisticsWeeklyHumidity(String ZipCode, String CountryCode,double precision) throws InvalidPrecisionException, InvalidZipCodeException{
 		
 		if(precision < 0 || precision >= 100) throw new InvalidPrecisionException();
 		

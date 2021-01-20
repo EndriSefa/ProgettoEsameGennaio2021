@@ -2,8 +2,9 @@ package com.univpm.ProgrammaOW.Controller;
 
 import java.util.Vector;
 
-
-
+import com.univpm.ProgrammaOW.Exceptions.InvalidPrecisionException;
+import com.univpm.ProgrammaOW.Exceptions.InvalidZipCodeException;
+import com.univpm.ProgrammaOW.Exceptions.NonExistingPredictionDataException;
 import com.univpm.ProgrammaOW.Filters.*;
 import com.univpm.ProgrammaOW.Statistics.*;
 
@@ -39,7 +40,7 @@ public class Controller {
 	//stampa il meteo corrente ricevendo come parametro lo Zip Code
 	@PostMapping("/meteoCorrente")
 	
-	public JSONObject DataZipCode(@RequestBody JSONObject componentiURL) {
+	public JSONObject DataZipCode(@RequestBody JSONObject componentiURL) throws InvalidZipCodeException {
 		
 		String zip = (String) componentiURL.get("zipCode");
 		String country = (String) componentiURL.get("countryCode");
@@ -69,7 +70,7 @@ public class Controller {
 	//stampa le previsioni dando come parametri lo Zip Code e il Country Code
 	@PostMapping("/previsioni")
 	
-	public Vector<JSONObject> forecast(@RequestBody JSONObject componentiURL){
+	public Vector<JSONObject> forecast(@RequestBody JSONObject componentiURL) throws InvalidZipCodeException{
 		
 		String zip = (String) componentiURL.get("zipCode");
 		String country = (String) componentiURL.get("countryCode");
@@ -89,7 +90,7 @@ public class Controller {
 	@GetMapping(value = "/Statistiche")
 	
 	
-	public String DailyStatsCityName(@RequestParam(name = "tipo") String tipo,@RequestParam(name = "periodo")String periodo,@RequestParam(name = "precisione",defaultValue = "5") String precisione,@RequestParam(name = "nomeCitta") String nomeCitta) {
+	public String DailyStatsCityName(@RequestParam(name = "tipo") String tipo,@RequestParam(name = "periodo")String periodo,@RequestParam(name = "precisione",defaultValue = "5") String precisione,@RequestParam(name = "nomeCitta") String nomeCitta) throws InvalidPrecisionException, NonExistingPredictionDataException {
 		
 		String risultato = " ";//variabile d'appoggio per il valore di ritorno
 		double precision1 = Double.parseDouble(precisione);		
@@ -223,7 +224,7 @@ public class Controller {
 	//stampa le statistiche ricevendo come parametri  Zip Code e CountryCode,periodo e precisione
 	@RequestMapping(value = "/Statistiche",method = RequestMethod.POST)
 	
-	public String DailyStatsZipCode(@RequestBody JSONObject componentiURL,@RequestParam (name = "tipo") String tipo,@RequestParam(name = "periodo")String periodo, @RequestParam(name = "precisione",defaultValue = "5") String precisione) {
+	public String DailyStatsZipCode(@RequestBody JSONObject componentiURL,@RequestParam (name = "tipo") String tipo,@RequestParam(name = "periodo")String periodo, @RequestParam(name = "precisione",defaultValue = "5") String precisione) throws InvalidPrecisionException, InvalidZipCodeException, NonExistingPredictionDataException {
 		
 		String zip = (String) componentiURL.get("zipCode");
 		String country = (String) componentiURL.get("countryCode");

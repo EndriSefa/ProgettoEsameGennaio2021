@@ -5,6 +5,8 @@ import java.text.DecimalFormat;
 import java.util.Vector;
 
 import com.univpm.ProgrammaOW.Exceptions.InvalidPrecisionException;
+import com.univpm.ProgrammaOW.Exceptions.InvalidZipCodeException;
+import com.univpm.ProgrammaOW.Exceptions.NonExistingPredictionDataException;
 
 import org.json.simple.JSONObject;
 
@@ -22,7 +24,7 @@ public class StatisticsDailyHumidity {
 	private double percentuale;
 	
 	//costruttore che prende come parametro il nome della città
-	public StatisticsDailyHumidity(String nomeCitta,double precision) throws InvalidPrecisionException {
+	public StatisticsDailyHumidity(String nomeCitta,double precision) throws InvalidPrecisionException, NonExistingPredictionDataException {
 		
 		//creo l'oggetto getDataCity dando come parametro il parametro del costruttore
 		getDataCity getDataCity = new getDataCity(nomeCitta);
@@ -62,7 +64,7 @@ public class StatisticsDailyHumidity {
 	
 	
 	//costruttore che prende come parametri zipCode e CountryCode
-	public StatisticsDailyHumidity(String zipCode, String CountryCode,double precision) throws InvalidPrecisionException {
+	public StatisticsDailyHumidity(String zipCode, String CountryCode,double precision) throws InvalidPrecisionException, InvalidZipCodeException, NonExistingPredictionDataException {
 		
 		if(precision <0 || precision >= 100) throw new InvalidPrecisionException();
 		

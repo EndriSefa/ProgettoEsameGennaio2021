@@ -82,8 +82,10 @@ public class getWeatherPredictions {
 	     
 	     public Vector<JSONObject> getPredictions() throws NonExistingPredictionDataException {
 	    	 
-	    	 if(this.PredictionsW.size() != 7) throw new NonExistingPredictionDataException();
-	    	 return this.PredictionsW;
+	    	 int i = this.PredictionsW.size();
+	    	 
+	    	 if(this.PredictionsW.size() < 6) throw new NonExistingPredictionDataException();
+	    	 else return this.PredictionsW;
 	     }
 	     
 }

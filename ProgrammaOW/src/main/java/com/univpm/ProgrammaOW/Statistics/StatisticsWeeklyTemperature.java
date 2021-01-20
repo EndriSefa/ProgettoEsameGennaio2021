@@ -7,6 +7,8 @@ import java.time.ZoneId;
 import java.util.Vector;
 
 import com.univpm.ProgrammaOW.Exceptions.InvalidPrecisionException;
+import com.univpm.ProgrammaOW.Exceptions.InvalidZipCodeException;
+import com.univpm.ProgrammaOW.Exceptions.NonExistingPredictionDataException;
 
 import org.json.simple.JSONObject;
 
@@ -25,7 +27,7 @@ public class StatisticsWeeklyTemperature {
 	private double temperaturaMassima;
 	private double temperaturaMinima;
 	
-	public StatisticsWeeklyTemperature(String nomeCitta, double precision) throws InvalidPrecisionException{
+	public StatisticsWeeklyTemperature(String nomeCitta, double precision) throws InvalidPrecisionException, NonExistingPredictionDataException{
 		
 		if(precision <0 || precision >= 100) throw new InvalidPrecisionException();
 		
@@ -97,7 +99,7 @@ public class StatisticsWeeklyTemperature {
 		
 	}
 	
-public StatisticsWeeklyTemperature(String zipCode,String countryCode, double precision) throws InvalidPrecisionException{
+public StatisticsWeeklyTemperature(String zipCode,String countryCode, double precision) throws InvalidPrecisionException, InvalidZipCodeException, NonExistingPredictionDataException{
 		
 	    if(precision <0 || precision >= 100) throw new InvalidPrecisionException();
 	    

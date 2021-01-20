@@ -6,6 +6,8 @@ import java.text.DecimalFormat;
 import java.util.Vector;
 
 import com.univpm.ProgrammaOW.Exceptions.InvalidPrecisionException;
+import com.univpm.ProgrammaOW.Exceptions.InvalidZipCodeException;
+import com.univpm.ProgrammaOW.Exceptions.NonExistingPredictionDataException;
 
 import org.json.simple.JSONObject;
 
@@ -27,7 +29,7 @@ public class StatisticsDailyTemperature {
 	
 	
 	
-	public StatisticsDailyTemperature(String nomeCitta,double precision) throws InvalidPrecisionException {
+	public StatisticsDailyTemperature(String nomeCitta,double precision) throws InvalidPrecisionException, NonExistingPredictionDataException {
 		
 		if(precision <0 || precision >= 100) throw new InvalidPrecisionException();
 		
@@ -83,7 +85,7 @@ public class StatisticsDailyTemperature {
 	
 	
 	
-	public StatisticsDailyTemperature(String zipCode, String CountryCode,double precision) throws InvalidPrecisionException{
+	public StatisticsDailyTemperature(String zipCode, String CountryCode,double precision) throws InvalidPrecisionException, InvalidZipCodeException, NonExistingPredictionDataException{
 		
 		if(precision < 0 || precision >= 100) throw new InvalidPrecisionException();
 		
