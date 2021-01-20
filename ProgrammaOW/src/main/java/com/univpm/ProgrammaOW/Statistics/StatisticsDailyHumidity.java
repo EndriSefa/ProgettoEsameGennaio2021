@@ -22,6 +22,7 @@ public class StatisticsDailyHumidity {
 	private double umiditaPrevista;
 	private double valore;
 	private double percentuale;
+	private String citta;
 	
 	//costruttore che prende come parametro il nome della città
 	public StatisticsDailyHumidity(String nomeCitta,double precision) throws InvalidPrecisionException, NonExistingPredictionDataException {
@@ -36,7 +37,7 @@ public class StatisticsDailyHumidity {
 		//metodo di getWeatherPredictions
 		JSONObject dailyWeather = predictions.getDailyWeather();
 		
-		
+		this.citta = (String) dailyWeather.get("Citta");
 		//metodo di getWeatherPredictions
 		Vector<JSONObject> previsioni = predictions.getPredictions();
 		
@@ -72,6 +73,7 @@ public class StatisticsDailyHumidity {
         getWeatherPredictions predictions = new getWeatherPredictions(getDataZipCode.getMeteo());
 		
 		JSONObject dailyWeather = predictions.getDailyWeather();
+		this.citta = (String) dailyWeather.get("Citta");
 		
 		Vector<JSONObject> previsioni = predictions.getPredictions();
 		
@@ -96,10 +98,10 @@ public class StatisticsDailyHumidity {
 		
 		DecimalFormat df = new DecimalFormat("#.00");
 		
-		if(Precisione == true) return "Umidità attuale: "+ df.format(umiditaReale) +"\n"
+		if(Precisione == true) return "Città: "+this.citta+ "\nUmidità attuale: "+ df.format(umiditaReale) +"\n"
 	                                  + "Umidità secondo le previsioni di ieri: "+ df.format(umiditaPrevista) +"\n"
 			                          +"Le previsioni erano attendibili con un margine inferiore del "+ valore+"% ("+ df.format(this.percentuale)+"%)";
-		else return "Umidità attuale: "+ df.format(umiditaReale)+"\n"
+		else return "Città: "+this.citta+ "\nUmidità attuale: "+ df.format(umiditaReale)+"\n"
 	               + "Umidità secondo le previsioni di ieri: "+ df.format(umiditaPrevista)+"\n"
 			       + "Le previsioni non erano attendibili con un margine superiore del "+ valore+"% ("+ df.format(this.percentuale) +"%)";
 	}

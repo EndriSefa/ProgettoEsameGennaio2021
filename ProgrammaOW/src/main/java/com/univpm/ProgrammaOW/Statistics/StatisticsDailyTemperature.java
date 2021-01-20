@@ -26,6 +26,7 @@ public class StatisticsDailyTemperature {
 	private double percentualeEffettiva;
 	private double temperaturaMassima;
 	private double temperaturaMinima;
+	private String citta;
 	
 	
 	
@@ -40,14 +41,14 @@ public class StatisticsDailyTemperature {
 	    JSONObject dailyWeather = predictions.getDailyWeather();
 		
 		Vector<JSONObject> previsioni = predictions.getPredictions();
-		
-		
-		
-		 
-		 
 		 
 		
+		
 		 
+		 
+		 
+		
+		 this.citta =(String) dailyWeather.get("Citta");
 		
 		//per prelevare i numeri facciamo un casting da number a long 
 		//a loro volta ai dati viene fatto un parsing in double 
@@ -96,7 +97,7 @@ public class StatisticsDailyTemperature {
 		
 		Vector<JSONObject> previsioni = predictions.getPredictions();
 		
-		 
+		this.citta =(String) dailyWeather.get("Citta"); 
 		Number app = (Number) dailyWeather.get("Temperatura");
 		
 		this.temperatura_attuale = app.doubleValue() ;
@@ -134,7 +135,7 @@ public class StatisticsDailyTemperature {
 		
 		DecimalFormat df = new DecimalFormat("#.00");
 		
-		if(Precisione) return "Temperatura attuale: "+ df.format(this.temperatura_attuale) +"\n" +
+		if(Precisione) return "Città: "+ this.citta + "\nTemperatura attuale: "+ df.format(this.temperatura_attuale) +"\n" +
 							"Temperatura Massima: " + df.format(this.temperaturaMassima) + 
 							"\t Temperatura Minima: " + df.format(this.temperaturaMinima) + "\n"
 							  +"Media: "+df.format(media)+'\t'
@@ -143,7 +144,7 @@ public class StatisticsDailyTemperature {
 			                  +"Le previsioni erano attendibili con un margine inferiore del "+ valore+"% ( "+ df.format(this.percentualeEffettiva) + "%)"+"\n"
 	                                 ;
 		
-		else return "Temperatura attuale: "+ df.format(this.temperatura_attuale)+"\n" 
+		else return "Città: "+this.citta + "\nTemperatura attuale: "+ df.format(this.temperatura_attuale)+"\n" 
 				+"Temperatura Massima: " + df.format(this.temperaturaMassima) + 
 				"\t Temperatura Minima: " + df.format(this.temperaturaMinima) + "\n"
 				   +"Temperatura Media: "+df.format(media)+"\t"

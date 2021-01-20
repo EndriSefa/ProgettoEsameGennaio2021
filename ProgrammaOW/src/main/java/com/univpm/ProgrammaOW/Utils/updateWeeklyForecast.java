@@ -24,10 +24,10 @@ public class updateWeeklyForecast {
 		String[] urlCity = {"https://api.openweathermap.org/data/2.5/onecall?lat=51.5085&lon=-0.1257&exclude=current,minutely,hourly&units=metric&appid=a623b59c7a3e36fdfa0a3fe39a7c0745&="
 				,"https://api.openweathermap.org/data/2.5/onecall?lat=33.441792&lon=-94.037689&exclude=current,minutely,hourly&units=metric&appid=a623b59c7a3e36fdfa0a3fe39a7c0745"
 				,"https://api.openweathermap.org/data/2.5/onecall?lat=43.5982&lon=13.5101&exclude=current,minutely,hourly&units=metric&appid=a623b59c7a3e36fdfa0a3fe39a7c0745&=",
-				"https://api.openweathermap.org/data/2.5/onecall?lat=41.3275&lon=19.8189&exclude=current,minutely,hourly&units=metric&appid=a623b59c7a3e36fdfa0a3fe39a7c0745&="
+				"https://api.openweathermap.org/data/2.5/onecall?lat=38.183&lon=15.566&exclude=current,minutely,hourly&units=metric&appid=a623b59c7a3e36fdfa0a3fe39a7c0745&="
 				}; 
 		
-		String[] nomi = {"Londra","Chicago","Ancona","Tirana"};
+		String[] nomi = {"Londra","Chicago","Ancona","Messina"};
 		
 		String appoggioPrevisioni = null;
 		

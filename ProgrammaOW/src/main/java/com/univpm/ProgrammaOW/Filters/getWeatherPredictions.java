@@ -84,7 +84,7 @@ public class getWeatherPredictions {
 	    	 
 	    	 int i = this.PredictionsW.size();
 	    	 
-	    	 if(this.PredictionsW.size() < 6) throw new NonExistingPredictionDataException();
+	    	 if(this.PredictionsW.size() != 7) throw new NonExistingPredictionDataException();
 	    	 else return this.PredictionsW;
 	     }
 	     

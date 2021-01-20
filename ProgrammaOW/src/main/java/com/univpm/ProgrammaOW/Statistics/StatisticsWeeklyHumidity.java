@@ -8,9 +8,11 @@ import java.time.ZoneId;
 import java.util.Vector;
 import com.univpm.ProgrammaOW.Exceptions.InvalidPrecisionException;
 import com.univpm.ProgrammaOW.Exceptions.InvalidZipCodeException;
+import com.univpm.ProgrammaOW.Exceptions.NonExistingPredictionDataException;
 
 import org.json.simple.JSONObject;
 
+import com.univpm.ProgrammaOW.Filters.getWeatherPredictions;
 import com.univpm.ProgrammaOW.Filters.getWeeklyForecast;
 import com.univpm.ProgrammaOW.Utils.getDataCity;
 import com.univpm.ProgrammaOW.Utils.getDataZipCode;
@@ -22,7 +24,7 @@ public class StatisticsWeeklyHumidity {
 	private String risultato;
 	private double valore;
 	
-	public StatisticsWeeklyHumidity(String cityName,double precision) throws InvalidPrecisionException{
+	public StatisticsWeeklyHumidity(String cityName,double precision) throws InvalidPrecisionException, NonExistingPredictionDataException{
 		
 		if(precision < 0 || precision >= 100) throw new InvalidPrecisionException();
 		
@@ -30,19 +32,20 @@ public class StatisticsWeeklyHumidity {
 		
 		getDataCity getDataCity = new getDataCity(cityName);
 		
-		getWeeklyForecast getWeeklyForecast = new getWeeklyForecast(getDataCity.getMeteo());
+		getWeatherPredictions getForecast = new getWeatherPredictions(getDataCity.getMeteo());
 		
-        JSONObject dailyWeather = getWeeklyForecast.getDailyWeather();
+        JSONObject dailyWeather = getForecast.getDailyWeather();
 		
-		Vector<JSONObject> previsioni = getWeeklyForecast.getForecast();
+		Vector<JSONObject> previsioni = getForecast.getPredictions();
 		
 		DecimalFormat df = new DecimalFormat("#.00");
 		Number app = (Number)dailyWeather.get("Umidita");
 		
 		this.umiditaReale = app.doubleValue();
 		String data_oggi = (String) dailyWeather.get("Data");
+		String citta = (String) dailyWeather.get("Citta");
 		
-		risultato = "Data di oggi: " + data_oggi + "\n";
+		risultato = "Città: "+ citta + "\nData di oggi: " + data_oggi + "\n";
 		
 		risultato +="Umidità attuale: "+ df.format(umiditaReale) + "\n"+"\n";
 		
@@ -65,7 +68,7 @@ public class StatisticsWeeklyHumidity {
 			                                       + "Umidità prevista: "+ df.format(umiditaPrevista)+"\n"
 			                                       +"Le previsioni del giorno erano attendibili con un margine inferiore del "+ valore+"% ( "+ df.format(percentuale) +"%)" + "\n";}
 			else {
-			      risultato+="Giorno: "+data+"\n"
+			      risultato+="Giorno in cui è stata fatta la previsione : "+data+"\n"
 			      +"Umidità prevista: "+ df.format(umiditaPrevista)+"\n"
 			      +"Le previsioni del giorno non erano attendibili con un margine superiore del "+ valore+"% ( "+ df.format(percentuale) +"%)" + "\n";
 			     }
@@ -79,18 +82,18 @@ public class StatisticsWeeklyHumidity {
 		
 	}
 	
-	public StatisticsWeeklyHumidity(String ZipCode, String CountryCode,double precision) throws InvalidPrecisionException, InvalidZipCodeException{
+	public StatisticsWeeklyHumidity(String ZipCode, String CountryCode,double precision) throws InvalidPrecisionException, InvalidZipCodeException, NonExistingPredictionDataException{
 		
 		if(precision < 0 || precision >= 100) throw new InvalidPrecisionException();
 		
 		this.valore = precision;
         getDataZipCode getDataZipCode = new getDataZipCode(ZipCode,CountryCode);
 		
-		getWeeklyForecast getWeeklyForecast = new getWeeklyForecast(getDataZipCode.getMeteo());
+		getWeatherPredictions getWeeklyForecast = new getWeatherPredictions(getDataZipCode.getMeteo());
 		
         JSONObject dailyWeather = getWeeklyForecast.getDailyWeather();
 		
-		Vector<JSONObject> previsioni = getWeeklyForecast.getForecast();
+		Vector<JSONObject> previsioni = getWeeklyForecast.getPredictions();
 		
 		DecimalFormat df = new DecimalFormat("#.00");
 		Number app = (Number)dailyWeather.get("Umidita");
@@ -99,7 +102,7 @@ public class StatisticsWeeklyHumidity {
 		
 		String data_oggi = (String) dailyWeather.get("Data");
 		
-risultato = "Data di oggi: " + data_oggi + "\n";
+		risultato = "Data di oggi: " + data_oggi + "\n";
 		
 		risultato +="Umidità attuale: "+ df.format(umiditaReale) + "\n"+"\n";
 		
