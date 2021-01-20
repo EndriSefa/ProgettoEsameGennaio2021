@@ -3,12 +3,14 @@ package com.univpm.ProgrammaOW.Filters;
 import java.util.Vector;
 
 
+
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 import com.univpm.ProgrammaOW.Utils.getDataCity;
 import com.univpm.ProgrammaOW.Utils.getDataZipCode;
 import com.univpm.ProgrammaOW.Utils.getForecast;
+import com.univpm.ProgrammaOW.Exceptions.NonExistingPredictionDataException;
 
 
 
@@ -78,6 +80,10 @@ public class getWeatherPredictions {
 	     
 	     public JSONObject getDailyWeather() {return dailyWeather;}
 	     
-	     public Vector<JSONObject> getPredictions() { return this.PredictionsW;}
+	     public Vector<JSONObject> getPredictions() throws NonExistingPredictionDataException {
+	    	 
+	    	 if(this.PredictionsW.size() != 7) throw new NonExistingPredictionDataException();
+	    	 return this.PredictionsW;
+	     }
 	     
 }

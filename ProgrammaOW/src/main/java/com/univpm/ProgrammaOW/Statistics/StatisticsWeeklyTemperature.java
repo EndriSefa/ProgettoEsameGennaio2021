@@ -1,9 +1,12 @@
 package com.univpm.ProgrammaOW.Statistics;
 
 import java.text.DecimalFormat;
+
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Vector;
+
+import com.univpm.ProgrammaOW.Exceptions.InvalidPrecisionException;
 
 import org.json.simple.JSONObject;
 
@@ -22,7 +25,9 @@ public class StatisticsWeeklyTemperature {
 	private double temperaturaMassima;
 	private double temperaturaMinima;
 	
-	public StatisticsWeeklyTemperature(String nomeCitta, double precision) {
+	public StatisticsWeeklyTemperature(String nomeCitta, double precision) throws InvalidPrecisionException{
+		
+		if(precision <0 || precision >= 100) throw new InvalidPrecisionException();
 		
 		getDataCity getDataCity = new getDataCity(nomeCitta);
 		
@@ -92,8 +97,10 @@ public class StatisticsWeeklyTemperature {
 		
 	}
 	
-public StatisticsWeeklyTemperature(String zipCode,String countryCode, double precision) {
+public StatisticsWeeklyTemperature(String zipCode,String countryCode, double precision) throws InvalidPrecisionException{
 		
+	    if(precision <0 || precision >= 100) throw new InvalidPrecisionException();
+	    
 		getDataZipCode getDataZipCode = new getDataZipCode(zipCode,countryCode);
 		
 		getWeatherPredictions predictions = new getWeatherPredictions(getDataZipCode.getMeteo());

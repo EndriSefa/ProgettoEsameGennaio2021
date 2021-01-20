@@ -2,9 +2,11 @@ package com.univpm.ProgrammaOW.Statistics;
 
 
 import java.text.DecimalFormat;
+
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Vector;
+import com.univpm.ProgrammaOW.Exceptions.InvalidPrecisionException;
 
 import org.json.simple.JSONObject;
 
@@ -19,7 +21,9 @@ public class StatisticsWeeklyHumidity {
 	private String risultato;
 	private double valore;
 	
-	public StatisticsWeeklyHumidity(String cityName,double precision) {
+	public StatisticsWeeklyHumidity(String cityName,double precision) throws InvalidPrecisionException{
+		
+		if(precision < 0 || precision >= 100) throw new InvalidPrecisionException();
 		
 		this.valore = precision;
 		
@@ -74,7 +78,9 @@ public class StatisticsWeeklyHumidity {
 		
 	}
 	
-	public StatisticsWeeklyHumidity(String ZipCode, String CountryCode,double precision) {
+	public StatisticsWeeklyHumidity(String ZipCode, String CountryCode,double precision) throws InvalidPrecisionException{
+		
+		if(precision < 0 || precision >= 100) throw new InvalidPrecisionException();
 		
 		this.valore = precision;
         getDataZipCode getDataZipCode = new getDataZipCode(ZipCode,CountryCode);

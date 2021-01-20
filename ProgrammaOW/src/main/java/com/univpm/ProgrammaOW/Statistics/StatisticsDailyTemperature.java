@@ -1,7 +1,11 @@
 package com.univpm.ProgrammaOW.Statistics;
 
+
 import java.text.DecimalFormat;
+
 import java.util.Vector;
+
+import com.univpm.ProgrammaOW.Exceptions.InvalidPrecisionException;
 
 import org.json.simple.JSONObject;
 
@@ -23,8 +27,9 @@ public class StatisticsDailyTemperature {
 	
 	
 	
-	public StatisticsDailyTemperature(String nomeCitta,double precision) {
+	public StatisticsDailyTemperature(String nomeCitta,double precision) throws InvalidPrecisionException {
 		
+		if(precision <0 || precision >= 100) throw new InvalidPrecisionException();
 		
 		getDataCity getDataCity = new getDataCity(nomeCitta);
 		
@@ -57,6 +62,7 @@ public class StatisticsDailyTemperature {
 		if(percentuale>precision) Precisione = false;
 		else Precisione = true;
 		
+		
 		this.valore = precision;
 		
 		app = (Number)dailyWeather.get("Temperatura massima");
@@ -77,7 +83,9 @@ public class StatisticsDailyTemperature {
 	
 	
 	
-	public StatisticsDailyTemperature(String zipCode, String CountryCode,double precision) {
+	public StatisticsDailyTemperature(String zipCode, String CountryCode,double precision) throws InvalidPrecisionException{
+		
+		if(precision < 0 || precision >= 100) throw new InvalidPrecisionException();
 		
 		getDataZipCode getDataZipCode = new getDataZipCode(zipCode,CountryCode);
         getWeatherPredictions predictions = new getWeatherPredictions(getDataZipCode.getMeteo());
@@ -98,6 +106,8 @@ public class StatisticsDailyTemperature {
 		
 		if(percentuale>precision) Precisione = false;
 		else Precisione = true;
+		
+		
 		
 		this.valore = precision;
 		

@@ -1,6 +1,7 @@
 package com.univpm.ProgrammaOW.Utils;
 
 import java.io.BufferedReader;
+
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.MalformedURLException;
@@ -9,6 +10,7 @@ import java.time.Instant;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
+import com.univpm.ProgrammaOW.Exceptions.InvalidZipCodeException;
 
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -18,7 +20,9 @@ public class getDataZipCode {
 	
 	private static JSONObject  meteo = null;
 	
-	public getDataZipCode(String zipCode, String countryCode) {
+	public getDataZipCode(String zipCode, String countryCode) throws InvalidZipCodeException {
+		
+		
 		
 		//la  stringa di openweather per la chimata con lo zip code viene divisa
 		//nelle seguenti due parti e queste vengono unite insieme al zip code e al country code
@@ -41,8 +45,8 @@ public class getDataZipCode {
 				in = new BufferedReader(
 				new InputStreamReader(url.openStream()));
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				throw new InvalidZipCodeException();
+				
 			}
 
 	        String line ="";
