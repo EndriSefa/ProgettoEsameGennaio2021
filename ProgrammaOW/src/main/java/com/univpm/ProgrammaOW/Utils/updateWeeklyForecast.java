@@ -18,7 +18,14 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
+/**
+ * @author Endri Sefa
+ * @author Micol Zazzarini
+ */
 public class updateWeeklyForecast {
+	/**
+	 * 
+	 */
 	public static void update() {
 		
 		String[] urlCity = {"https://api.openweathermap.org/data/2.5/onecall?lat=51.5085&lon=-0.1257&exclude=current,minutely,hourly&units=metric&appid=a623b59c7a3e36fdfa0a3fe39a7c0745&="

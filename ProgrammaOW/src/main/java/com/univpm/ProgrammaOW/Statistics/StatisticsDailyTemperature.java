@@ -15,21 +15,66 @@ import com.univpm.ProgrammaOW.Filters.getWeatherPredictions;
 import com.univpm.ProgrammaOW.Utils.getDataCity;
 import com.univpm.ProgrammaOW.Utils.getDataZipCode;
 
+/**
+ * @author Endri Sefa
+ * @author Micol Zazzarini
+ */
 public class StatisticsDailyTemperature {
 	
+	/**
+	 * Boolean che  ci indica se la previsione fatta è stata accurata o meno 
+	 */
+	
 	private boolean Precisione;
+	/**
+	 * Double con il valore della temperatura attuale
+	 */
 	private double temperatura_attuale;
+	/**
+	 * Double con il valore della temperatura prevista ieri per oggi
+	 */
 	private double temperatura_prevista;
+	/**
+	 * Double con il valore di accuratezza inserito dall'utente
+	 */
 	private double valore;
+	/**
+	 * Double con il valore della temperatura media
+	 */
+	
 	private double media;
+	/**
+	 * Double con il valore della varianza della temperatura
+	 */
 	private double varianza;
+	/**
+	 * Double con il valore effettivo dell' accuratezza
+	 */
 	private double percentualeEffettiva;
+	/**
+	 * Double con il valore della temperatura massima
+	 */
 	private double temperaturaMassima;
+	/**
+	 * Double con in valore della temperatura minima
+	 */
 	private double temperaturaMinima;
+	/**
+	 * Stringa contenente il nome della città
+	 */
 	private String citta;
 	
 	
 	
+	/**Overloadig
+	 * Primo caso: Stringa della città
+	 * @param nomeCitta Stringa con il nome della città
+	 * @param precision Double con il valore della precisione
+	 * @throws InvalidPrecisionException  Eccezione personalizzata nel caso in cui la precisione che
+	 * inserisce l'utente sia inferiore di 0 o superiore di 100
+	 * @throws NonExistingPredictionDataException Eccezione personalizzata nel caso in cui 
+	 * mancassero i dati relativi alle previsioni passate (basta che manchi un giorno)
+	 */
 	public StatisticsDailyTemperature(String nomeCitta,double precision) throws InvalidPrecisionException, NonExistingPredictionDataException {
 		
 		if(precision <0 || precision >= 100) throw new InvalidPrecisionException();
@@ -86,6 +131,18 @@ public class StatisticsDailyTemperature {
 	
 	
 	
+	/**Overloading
+	 * Secondo Caso: Stringhe per lo Zip Code ed il Country Code
+	 * @param zipCode Stringa contenente lo Zip Code
+	 * @param countryCode Stringa contenente il Country Code
+	 * @param precision Double con il valore della precisione
+	 * @throws InvalidPrecisionException  Eccezione personalizzata nel caso in cui la precisione che
+	 * inserisce l'utente sia inferiore di 0 o superiore di 100
+	 * @throws NonExistingPredictionDataException Eccezione personalizzata nel caso in cui 
+	 * mancassero i dati relativi alle previsioni passate (basta che manchi un giorno)
+	 * @throws InvalidZipCodeException Eccezione personalizzata in caso lo Zip Code e/o il Country
+	 * code fossero sbagliati 
+	 */
 	public StatisticsDailyTemperature(String zipCode, String CountryCode,double precision) throws InvalidPrecisionException, InvalidZipCodeException, NonExistingPredictionDataException{
 		
 		if(precision < 0 || precision >= 100) throw new InvalidPrecisionException();
@@ -131,6 +188,9 @@ public class StatisticsDailyTemperature {
 	}
 	
 	
+	/**
+	 *Overriding del metodo toString per restituire le statistiche giornaliere relative alla temperatura
+	 */
 	public String toString() {
 		
 		DecimalFormat df = new DecimalFormat("#.00");

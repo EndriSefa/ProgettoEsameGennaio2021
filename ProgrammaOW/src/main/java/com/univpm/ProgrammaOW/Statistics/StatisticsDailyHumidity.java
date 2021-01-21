@@ -15,16 +15,44 @@ import com.univpm.ProgrammaOW.Filters.getWeatherPredictions;
 import com.univpm.ProgrammaOW.Utils.getDataCity;
 import com.univpm.ProgrammaOW.Utils.getDataZipCode;
 
+/**
+ * @author Endri Sefa
+ * @author Micol Zazzarini
+ */
 public class StatisticsDailyHumidity {
 	
+	/**
+	 * Boolean che  ci indica se la previsione fatta è stata accurata o meno
+	 */
 	private boolean Precisione;
+	/**
+	 * Double con il valore dell' umidità attuale
+	 */
 	private double umiditaReale;
+	/**
+	 * Double con il valore dell'umidità prevista ieri per oggi
+	 */
 	private double umiditaPrevista;
+	/**
+	 * Double con il valore di accuratezza inserita dall'utente
+	 */
 	private double valore;
+	/**
+	 * Double con il valore della temperatura massima
+	 */
 	private double percentuale;
+	/**
+	 * Stringa con il nome della città
+	 */
 	private String citta;
 	
 	//costruttore che prende come parametro il nome della città
+	/**
+	 * @param nomeCitta
+	 * @param precision
+	 * @throws InvalidPrecisionException
+	 * @throws NonExistingPredictionDataException
+	 */
 	public StatisticsDailyHumidity(String nomeCitta,double precision) throws InvalidPrecisionException, NonExistingPredictionDataException {
 		
 		//creo l'oggetto getDataCity dando come parametro il parametro del costruttore
@@ -65,6 +93,14 @@ public class StatisticsDailyHumidity {
 	
 	
 	//costruttore che prende come parametri zipCode e CountryCode
+	/**
+	 * @param zipCode
+	 * @param CountryCode
+	 * @param precision
+	 * @throws InvalidPrecisionException
+	 * @throws InvalidZipCodeException
+	 * @throws NonExistingPredictionDataException
+	 */
 	public StatisticsDailyHumidity(String zipCode, String CountryCode,double precision) throws InvalidPrecisionException, InvalidZipCodeException, NonExistingPredictionDataException {
 		
 		if(precision <0 || precision >= 100) throw new InvalidPrecisionException();
@@ -94,6 +130,9 @@ public class StatisticsDailyHumidity {
 	}
 	
 	//metodo che stampa umidità reale, umidità prevista e dice se le previsioni erano giuste
+	/**
+	 *
+	 */
 	public String toString() {
 		
 		DecimalFormat df = new DecimalFormat("#.00");

@@ -14,10 +14,20 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
+/**
+ * @author Endri Sefa
+ * @author Micol Zazzarini
+ */
 public class getDataCity {
 	
+	/**
+	 * 
+	 */
 	private JSONObject  meteo;
 	
+	/**
+	 * @param city
+	 */
 	public  getDataCity(String city) {
 		
 		//la  stringa di openweather per la chimata con lo zip code viene divisa
@@ -152,6 +162,9 @@ public class getDataCity {
 		
 	}
 	
+	/**
+	 * @return
+	 */
 	public JSONObject getMeteo() {
 		return this.meteo;
 	}

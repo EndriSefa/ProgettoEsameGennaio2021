@@ -10,8 +10,15 @@ import org.json.simple.JSONObject;
 import com.univpm.ProgrammaOW.Utils.getForecast;
 
 
+/**
+ * @author Endri Sefa
+ * @author Micol Zazzarini
+ */
 public class getWeeklyForecast {
 	
+	/**
+	 * Oggetto getforecast che ci serve per prendere i dati relativi alle previsioni
+	 */
 	getForecast getForecast = new getForecast();
 	
 	
@@ -19,7 +26,13 @@ public class getWeeklyForecast {
 	
 	
 	
+	/**
+	 * JSONObject dove salveremo il meteo corrente
+	 */
 	private  JSONObject dailyWeather;
+	/**
+	 *  Vettore di JSONObject dove salveremo le previsioni per la settimana seguente
+	 */
 	private  Vector<JSONObject> forecastW = new Vector<JSONObject>();
 	
 	
@@ -27,6 +40,10 @@ public class getWeeklyForecast {
 	
 	
 	//primo costruttore, prende come parametro una stringa con il nome di una città e ci inizializza i metodi delle classi di utils
+	/**
+	 * Costruttore della classe delle previsioni per la settimana seguente
+	 * @param parametro1 JSONObject contenente il meteo corrente
+	 */
 	public getWeeklyForecast( JSONObject parametro1 ) {
 		
 		
@@ -72,8 +89,15 @@ public class getWeeklyForecast {
 	     
 	    	
 	     
-	     public JSONObject getDailyWeather() {return dailyWeather;}
+	     /**
+	     *  Metodo  get della classe che ci restituisce il meteo corrente 
+	     * @return dailyWeather JSOObject contenente il meteo corrente 
+	     */
+	    public JSONObject getDailyWeather() {return dailyWeather;}
 	     
-	     public Vector<JSONObject> getForecast() { return this.forecastW;}
+	     /**Metodo get della classe che ci restituisce le previsioni della settimana seguente
+	     * @return forecastW Vettore di JSONObject contenente le previsioni della prossima settimana
+	     */
+	    public Vector<JSONObject> getForecast() { return this.forecastW;}
 	     
 }

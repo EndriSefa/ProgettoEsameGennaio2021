@@ -16,10 +16,22 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
+/**
+ * @author Endri Sefa
+ * @author Micol Zazzarini
+ */
 public class getDataZipCode {
 	
-	private static JSONObject  meteo = null;
+	/**
+	 * 
+	 */
+	private JSONObject  meteo = null;
 	
+	/**
+	 * @param zipCode
+	 * @param countryCode
+	 * @throws InvalidZipCodeException
+	 */
 	public getDataZipCode(String zipCode, String countryCode) throws InvalidZipCodeException {
 		
 		
@@ -135,6 +147,9 @@ public class getDataZipCode {
 		
 	}
 	
+	/**
+	 * @return
+	 */
 	public JSONObject getMeteo() {
 		return meteo;
 	}

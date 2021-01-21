@@ -16,17 +16,52 @@ import com.univpm.ProgrammaOW.Filters.getWeatherPredictions;
 import com.univpm.ProgrammaOW.Utils.getDataCity;
 import com.univpm.ProgrammaOW.Utils.getDataZipCode;
 
+/**
+ * @author Endri Sefa
+ * @author Micol Zazzarini
+ */
 public class StatisticsWeeklyTemperature {
 	
 	
+	/**
+	 * Double con il valore della temperatura attuale
+	 */
 	private double temperatura_attuale;
+	/**
+	 * Double con il valore della precisione inserita dall' utente
+	 */
 	private double valore;
+	/**
+	 * Double con il valore della temperatura media
+	 */
 	private double media;
+	/**
+	 * Double con il valore della varianza della temperatura
+	 */
 	private double varianza;
+	/**
+	 * Stringa contenente ciò che vogliamo far vedere all' utente
+	 */
 	private String risultato;
+	/**
+	 * Double con il valore della temperatura Massima
+	 */
 	private double temperaturaMassima;
+	/**
+	 * Double con il valore della temperatua Minima
+	 */
 	private double temperaturaMinima;
 	
+	/**Overloading
+	 * Primo caso : stringa della città
+	 * Costruttore della classe delle statistiche settimanali relative alla temperatura
+	 * @param nomeCitta Stringa con il nome della città 
+	 * @param precision Double con il valore della precisione
+	 * @throws InvalidPrecisionException  Eccezione personalizzata nel caso in cui la precisione che
+	 * inserisce l'utente sia inferiore di 0 o superiore di 100
+	 * @throws NonExistingPredictionDataException Eccezione personalizzata nel caso in cui 
+	 * mancassero i dati relativi alle previsioni passate (basta che manchi un giorno)
+	 */
 	public StatisticsWeeklyTemperature(String nomeCitta, double precision) throws InvalidPrecisionException, NonExistingPredictionDataException{
 		
 		if(precision <0 || precision >= 100) throw new InvalidPrecisionException();
@@ -99,6 +134,20 @@ public class StatisticsWeeklyTemperature {
 		
 	}
 	
+/** Overloading
+ * Secondo caso: Stringhe per lo Zip Code ed il Country Code
+ * Costruttore della classe delle statistiche settimanali relative alla temperatura
+ * @param zipCode Stringa contenente lo Zip Code
+ * @param countryCode Stringa contenente il Country Code
+ * @param precision Double con il valore della precisione
+ * @throws InvalidPrecisionException  Eccezione personalizzata nel caso in cui la precisione che
+ * inserisce l'utente sia inferiore di 0 o superiore di 100
+ * @throws NonExistingPredictionDataException Eccezione personalizzata nel caso in cui 
+ * mancassero i dati relativi alle previsioni passate (basta che manchi un giorno)
+ * @throws InvalidZipCodeException Eccezione personalizzata in caso lo Zip Code e/o il Country
+	 * code fossero sbagliati 
+ * 
+ */
 public StatisticsWeeklyTemperature(String zipCode,String countryCode, double precision) throws InvalidPrecisionException, InvalidZipCodeException, NonExistingPredictionDataException{
 		
 	    if(precision <0 || precision >= 100) throw new InvalidPrecisionException();
@@ -175,6 +224,9 @@ public StatisticsWeeklyTemperature(String zipCode,String countryCode, double pre
 	
 	
 	
+	/**
+	 *Overriding del toString in modo da far restituire la stringa Risultato
+	 */
 	public String toString() {return this.risultato;}
 
 }

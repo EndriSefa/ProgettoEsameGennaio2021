@@ -14,7 +14,15 @@ import com.univpm.ProgrammaOW.Exceptions.NonExistingPredictionDataException;
 
 
 
+/**
+ * @author Endri Sefa
+ * @author Micol Zazzarini
+ */
+
 public class getWeatherPredictions {
+	
+	/** Oggetto getforecast che ci serve per prendere i dati relativi alle previsioni 
+	 */
 	
 	getForecast getForecast = new getForecast();
 	
@@ -23,7 +31,15 @@ public class getWeatherPredictions {
 	
 	
 	
+	/**
+	 * JSONObject dove salveremo il meteo corrente
+	 */
+	
 	private  JSONObject dailyWeather;
+	/**
+	 * Vettore di JSONObject dove salveremo le previsioni passate relative al giorno di oggi
+	 */
+	
 	private  Vector<JSONObject> PredictionsW = new Vector<JSONObject>();
 	
 	
@@ -31,6 +47,11 @@ public class getWeatherPredictions {
 	
 	
 	//primo costruttore, prende come parametro una stringa con il nome di una città e ci inizializza i metodi delle classi di utils
+	/**
+	 * Costruttore della classe delle previsioni passate relative al giorno di oggi
+	 * @param parametro1 JSONObject contenente il meteo corrente
+	 */
+	
 	public getWeatherPredictions( JSONObject parametro1 ) {
 		
 		
@@ -78,9 +99,21 @@ public class getWeatherPredictions {
 	     
 	    	
 	     
-	     public JSONObject getDailyWeather() {return dailyWeather;}
+	    
+	    /**
+	     * Metodo  get della classe che ci restituisce il meteo corrente 
+	     * @return dailyWeather JSOObject contenente il meteo corrente 
+	     */
+	    public JSONObject getDailyWeather() {return dailyWeather;}
 	     
-	     public Vector<JSONObject> getPredictions() throws NonExistingPredictionDataException {
+	    
+	    /**Metodo get della classe che ci restituisce le previsioni passate relative al giorno di oggi
+	     * @return PredictionsW Vettore di JSONObject contenente le previsioni passate relative
+	     * al giorno di oggi
+	     * @throws NonExistingPredictionDataException Eccezione personalizzata nel caso in cui 
+	 * mancassero i dati relativi alle previsioni passate (basta che manchi un giorno)
+	     */
+	    public Vector<JSONObject> getPredictions() throws NonExistingPredictionDataException {
 	    	 
 	    	 int i = this.PredictionsW.size();
 	    	 

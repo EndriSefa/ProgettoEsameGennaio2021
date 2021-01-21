@@ -17,10 +17,20 @@ import org.json.simple.parser.ParseException;
 
 
 
+/**
+ * @author Endri Sefa
+ * @author Micol Zazzarini
+ */
 public class getForecast {
 	
+	/**
+	 * 
+	 */
 	private  JSONArray previsioni;
 	
+	/**
+	 * 
+	 */
 	public getForecast() {
 		
 		
@@ -223,6 +233,9 @@ public class getForecast {
 	}
 	
 	
+	/**
+	 * @return
+	 */
 	public JSONArray getPrevisioni() {
 		return this.previsioni;
 	}

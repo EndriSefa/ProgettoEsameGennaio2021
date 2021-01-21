@@ -17,13 +17,32 @@ import com.univpm.ProgrammaOW.Filters.getWeeklyForecast;
 import com.univpm.ProgrammaOW.Utils.getDataCity;
 import com.univpm.ProgrammaOW.Utils.getDataZipCode;
 
+/**
+ * @author Endri
+ *
+ */
 public class StatisticsWeeklyHumidity {
 	
 	
+	/**
+	 * 
+	 */
 	private double umiditaReale;
+	/**
+	 * 
+	 */
 	private String risultato;
+	/**
+	 * 
+	 */
 	private double valore;
 	
+	/**
+	 * @param cityName
+	 * @param precision
+	 * @throws InvalidPrecisionException
+	 * @throws NonExistingPredictionDataException
+	 */
 	public StatisticsWeeklyHumidity(String cityName,double precision) throws InvalidPrecisionException, NonExistingPredictionDataException{
 		
 		if(precision < 0 || precision >= 100) throw new InvalidPrecisionException();
@@ -82,6 +101,14 @@ public class StatisticsWeeklyHumidity {
 		
 	}
 	
+	/**
+	 * @param ZipCode
+	 * @param CountryCode
+	 * @param precision
+	 * @throws InvalidPrecisionException
+	 * @throws InvalidZipCodeException
+	 * @throws NonExistingPredictionDataException
+	 */
 	public StatisticsWeeklyHumidity(String ZipCode, String CountryCode,double precision) throws InvalidPrecisionException, InvalidZipCodeException, NonExistingPredictionDataException{
 		
 		if(precision < 0 || precision >= 100) throw new InvalidPrecisionException();
@@ -134,6 +161,9 @@ public class StatisticsWeeklyHumidity {
 		}
 	}
 	
+	/**
+	 *
+	 */
 	public String toString() { return risultato; }
 			
 	}
