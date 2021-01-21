@@ -103,7 +103,7 @@ public class StatisticsDailyHumidity {
 	 * Secondo Caso: Stringhe per lo Zip Code ed il Country Code
 	 * Costruttore della classe delle statistiche giornaliere relative all'umidità
 	 * @param zipCode Stringa contenente lo Zip Code
-	 * @param countryCode Stringa contenente il Country Code
+	 * @param CountryCode Stringa contenente il Country Code
 	 * @param precision Double con il valore della precisione
 	 * @throws InvalidPrecisionException  Eccezione personalizzata nel caso in cui la precisione che
 	 * inserisce l'utente sia inferiore di 0 o superiore di 100 

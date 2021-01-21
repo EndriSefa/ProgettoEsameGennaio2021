@@ -41,7 +41,7 @@ public class StatisticsWeeklyHumidity {
 	/**Overloading
 	 * Primo caso: Stringa per il nome della città
 	 * Costruttore della classe delle statistiche settimanali relative all'umidità
-	 * @param nomeCitta Stringa con il nome della città
+	 * @param cityName Stringa con il nome della città
 	 * @param precision Double con il valore della precisione
 	 * @throws InvalidPrecisionException  Eccezione personalizzata nel caso in cui la precisione che
 	 * inserisce l'utente sia inferiore di 0 o superiore di 100
@@ -110,8 +110,8 @@ public class StatisticsWeeklyHumidity {
 	/** Overloading
 	 * Secondo caso: Stringhe per lo Zip Code ed il Country Code
 	 * Costruttore della classe delle statistiche settimanali relative all'umidità
-	 * @param zipCode Stringa contenente lo Zip Code
-	 * @param countryCode Stringa contenente il Country Code
+	 * @param ZipCode Stringa contenente lo Zip Code
+	 * @param CountryCode Stringa contenente il Country Code
 	 * @param precision Double con il valore della precisione
 	 * @throws InvalidPrecisionException  Eccezione personalizzata nel caso in cui la precisione che
 	 * inserisce l'utente sia inferiore di 0 o superiore di 100 
