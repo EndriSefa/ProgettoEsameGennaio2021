@@ -17,19 +17,23 @@ import org.json.simple.parser.ParseException;
 
 
 
-/**
+/**Classe che legge la data dal file "Previsioni.txt" . Se la data è diversa dalla 
+ * data di oggi si lancia il metodo update di UpdateWeeklyForecast che ci prende le
+ * previsioni della settimana delle città desiderate. 
+ * Una volta fatto questo controllo popola il JSONArray previsioni con tutte le previsioni
+ * del nostro file
  * @author Endri Sefa
  * @author Micol Zazzarini
  */
 public class getForecast {
 	
 	/**
-	 * 
+	 * JSONArray dove salviamo tutte le previsoni del nostro file
 	 */
 	private  JSONArray previsioni;
 	
 	/**
-	 * 
+	 * Costruttore della classe che  non prende nulla in input
 	 */
 	public getForecast() {
 		
@@ -233,8 +237,8 @@ public class getForecast {
 	}
 	
 	
-	/**
-	 * @return
+	/**Metodo getter che ci da il  JSONArry con le previsioni
+	 * @return previsioni JSONArray contenente tutte le previsioni del file "Previsioni.txt"
 	 */
 	public JSONArray getPrevisioni() {
 		return this.previsioni;
@@ -244,7 +248,7 @@ public class getForecast {
 /*
  * la problematica iniziale era aggiornare i dati ogni ora, ma vedendo che spesso i dati risultavano uguali, 
  * infatti tendenzialmente i dati rimangono tali, in quanto previsioni e non vengono aggiornati se non da un giorno 
- * all' altro abbiamo deciso di aggiornare i dati ogni ora
+ * all' altro abbiamo deciso di aggiornare i dati ogni giorno
  * 
  * Il controllo avviene tramite la data
  * Per ottimizzare i tempi ci limitiamo a leggere solo la data e non tutto il file che diventa man mano più grande

@@ -18,13 +18,16 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
-/**
+/**Classe contenente un metodo il quale quando viene eseguito 
+ * aggiorna i dati relativi alle previsoni e li mette sul file "appoggio.txt" 
  * @author Endri Sefa
  * @author Micol Zazzarini
  */
 public class updateWeeklyForecast {
 	/**
-	 * 
+	 * Metodo che aggiorna i dati delle previsioni e li salva nel file "appoggio.txt"
+	 * * I dati vengono  filtrati dalla API di OpenWeather, i JSONObject delle previsioni
+	 * vengono presi singolarmente , filtrati e poi messi nel JSONArray.
 	 */
 	public static void update() {
 		

@@ -10,7 +10,7 @@ import org.json.simple.JSONObject;
 import com.univpm.ProgrammaOW.Utils.getForecast;
 
 
-/**
+/**Classe per la visualizzazione delle previsioni della settimana di una data città
  * @author Endri Sefa
  * @author Micol Zazzarini
  */

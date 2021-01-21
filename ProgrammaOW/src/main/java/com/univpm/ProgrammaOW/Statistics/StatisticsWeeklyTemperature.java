@@ -16,7 +16,8 @@ import com.univpm.ProgrammaOW.Filters.getWeatherPredictions;
 import com.univpm.ProgrammaOW.Utils.getDataCity;
 import com.univpm.ProgrammaOW.Utils.getDataZipCode;
 
-/**
+/** Classe per la visualizzazione delle statistiche della temperatura
+ *  settimanali di una data città 
  * @author Endri Sefa
  * @author Micol Zazzarini
  */
@@ -40,7 +41,7 @@ public class StatisticsWeeklyTemperature {
 	 */
 	private double varianza;
 	/**
-	 * Stringa contenente ciò che vogliamo far vedere all' utente
+	 * Stringa contenente ciò che vogliamo far vedere all' utente riguardo le statistiche
 	 */
 	private String risultato;
 	/**
@@ -59,6 +60,7 @@ public class StatisticsWeeklyTemperature {
 	 * @param precision Double con il valore della precisione
 	 * @throws InvalidPrecisionException  Eccezione personalizzata nel caso in cui la precisione che
 	 * inserisce l'utente sia inferiore di 0 o superiore di 100
+	 * (in caso non venga inserito si sceglie il 5% di default)
 	 * @throws NonExistingPredictionDataException Eccezione personalizzata nel caso in cui 
 	 * mancassero i dati relativi alle previsioni passate (basta che manchi un giorno)
 	 */
@@ -141,11 +143,12 @@ public class StatisticsWeeklyTemperature {
  * @param countryCode Stringa contenente il Country Code
  * @param precision Double con il valore della precisione
  * @throws InvalidPrecisionException  Eccezione personalizzata nel caso in cui la precisione che
- * inserisce l'utente sia inferiore di 0 o superiore di 100
+ * inserisce l'utente sia inferiore di 0 o superiore di 100 
+ * (in caso non venga inserito si sceglie il 5% di default)
  * @throws NonExistingPredictionDataException Eccezione personalizzata nel caso in cui 
  * mancassero i dati relativi alle previsioni passate (basta che manchi un giorno)
  * @throws InvalidZipCodeException Eccezione personalizzata in caso lo Zip Code e/o il Country
-	 * code fossero sbagliati 
+ * code fossero sbagliati 
  * 
  */
 public StatisticsWeeklyTemperature(String zipCode,String countryCode, double precision) throws InvalidPrecisionException, InvalidZipCodeException, NonExistingPredictionDataException{

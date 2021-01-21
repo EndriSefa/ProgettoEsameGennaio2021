@@ -16,21 +16,25 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
-/**
+/**Classe che ci da il meteo corrente di una città della quale conosciamo
+ * lo Zip Code ed il  Country Code
  * @author Endri Sefa
  * @author Micol Zazzarini
  */
 public class getDataZipCode {
 	
 	/**
-	 * 
+	 * JSONObject dove salviamo il meteo corrente
 	 */
 	private JSONObject  meteo = null;
 	
-	/**
-	 * @param zipCode
-	 * @param countryCode
-	 * @throws InvalidZipCodeException
+	/**Costruttore della classe che prende come oggetti due stringhe.
+	 * I dati vengono  filtrati dalla API di OpenWeather e poi vengono inseriti nel
+	 * JSONObect locale per avere un oggetto più efficiente e utile
+	 * @param zipCode Stringa contenente lo Zip Code ( codice postale) della città
+	 * @param countryCode Stringa contenente il Country Code
+	 * @throws InvalidZipCodeException Eccezione personalizzata in caso lo Zip Code e/o il Country
+	 * code fossero sbagliati  
 	 */
 	public getDataZipCode(String zipCode, String countryCode) throws InvalidZipCodeException {
 		
@@ -147,8 +151,8 @@ public class getDataZipCode {
 		
 	}
 	
-	/**
-	 * @return
+	/**Metodo getter che ci restituisce il meteo corrente
+	 * @return meteo JSONObject contenente il meteo corrente
 	 */
 	public JSONObject getMeteo() {
 		return meteo;

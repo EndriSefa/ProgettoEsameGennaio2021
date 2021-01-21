@@ -14,7 +14,8 @@ import com.univpm.ProgrammaOW.Exceptions.NonExistingPredictionDataException;
 
 
 
-/**
+/**Classe per la visualizzazione delle previsioni passate per il giorno corrente
+ *  una data città
  * @author Endri Sefa
  * @author Micol Zazzarini
  */

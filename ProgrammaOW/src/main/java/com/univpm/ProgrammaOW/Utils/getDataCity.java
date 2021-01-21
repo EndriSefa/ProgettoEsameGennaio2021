@@ -14,19 +14,21 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
-/**
+/**Classe che ci da il meteo corrente di una città tra Londra e Chicago
  * @author Endri Sefa
  * @author Micol Zazzarini
  */
 public class getDataCity {
 	
 	/**
-	 * 
+	 * JSONObject dove salviamo il meteo corrente
 	 */
 	private JSONObject  meteo;
 	
-	/**
-	 * @param city
+	/**Costruttore della classe che prende come oggetto una stringa.
+	 * I dati vengono  filtrati dalla API di OpenWeather e poi vengono inseriti nel
+	 * JSONObect locale per avere un oggetto più efficiente e utile
+	 * @param city Stringa con il nome della città scelta
 	 */
 	public  getDataCity(String city) {
 		
@@ -162,8 +164,8 @@ public class getDataCity {
 		
 	}
 	
-	/**
-	 * @return
+	/**Metodo getter che ci restituisce il meteo corrente
+	 * @return meteo JSONObject contenente il meteo corrente
 	 */
 	public JSONObject getMeteo() {
 		return this.meteo;

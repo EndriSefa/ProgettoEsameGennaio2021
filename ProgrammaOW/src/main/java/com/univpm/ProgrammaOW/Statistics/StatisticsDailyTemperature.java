@@ -15,7 +15,7 @@ import com.univpm.ProgrammaOW.Filters.getWeatherPredictions;
 import com.univpm.ProgrammaOW.Utils.getDataCity;
 import com.univpm.ProgrammaOW.Utils.getDataZipCode;
 
-/**
+/** Classe per la visualizzazine delle statistiche giornaliere di una data città
  * @author Endri Sefa
  * @author Micol Zazzarini
  */
@@ -72,6 +72,7 @@ public class StatisticsDailyTemperature {
 	 * @param precision Double con il valore della precisione
 	 * @throws InvalidPrecisionException  Eccezione personalizzata nel caso in cui la precisione che
 	 * inserisce l'utente sia inferiore di 0 o superiore di 100
+	 * (in caso non venga inserito si sceglie il 5% di default)
 	 * @throws NonExistingPredictionDataException Eccezione personalizzata nel caso in cui 
 	 * mancassero i dati relativi alle previsioni passate (basta che manchi un giorno)
 	 */
@@ -137,7 +138,8 @@ public class StatisticsDailyTemperature {
 	 * @param countryCode Stringa contenente il Country Code
 	 * @param precision Double con il valore della precisione
 	 * @throws InvalidPrecisionException  Eccezione personalizzata nel caso in cui la precisione che
-	 * inserisce l'utente sia inferiore di 0 o superiore di 100
+	 * inserisce l'utente sia inferiore di 0 o superiore di 100 
+	 * (in caso non venga inserito si sceglie il 5% di default)
 	 * @throws NonExistingPredictionDataException Eccezione personalizzata nel caso in cui 
 	 * mancassero i dati relativi alle previsioni passate (basta che manchi un giorno)
 	 * @throws InvalidZipCodeException Eccezione personalizzata in caso lo Zip Code e/o il Country

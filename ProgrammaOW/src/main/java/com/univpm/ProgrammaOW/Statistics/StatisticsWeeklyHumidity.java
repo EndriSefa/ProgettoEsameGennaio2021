@@ -17,31 +17,37 @@ import com.univpm.ProgrammaOW.Filters.getWeeklyForecast;
 import com.univpm.ProgrammaOW.Utils.getDataCity;
 import com.univpm.ProgrammaOW.Utils.getDataZipCode;
 
-/**
- * @author Endri
- *
+/** Classe per la visualizzazione delle statistiche settimanali dell'umidità 
+ * di una città data
+ * @author Endri Sefa
+ * @author Micol Zazzarini
  */
 public class StatisticsWeeklyHumidity {
 	
 	
 	/**
-	 * 
+	 * Double con il valore dell'umidità attuale
 	 */
 	private double umiditaReale;
 	/**
-	 * 
+	 * Stringa contenente ciò che vogliamo far vedere all' utente riguardo le statistiche
 	 */
 	private String risultato;
 	/**
-	 * 
+	 * Double con il valore dell' accuratezza inserita dall' utente
 	 */
 	private double valore;
 	
-	/**
-	 * @param cityName
-	 * @param precision
-	 * @throws InvalidPrecisionException
-	 * @throws NonExistingPredictionDataException
+	/**Overloading
+	 * Primo caso: Stringa per il nome della città
+	 * Costruttore della classe delle statistiche settimanali relative all'umidità
+	 * @param nomeCitta Stringa con il nome della città
+	 * @param precision Double con il valore della precisione
+	 * @throws InvalidPrecisionException  Eccezione personalizzata nel caso in cui la precisione che
+	 * inserisce l'utente sia inferiore di 0 o superiore di 100
+	 * (in caso non venga inserito si sceglie il 5% di default)
+	 * @throws NonExistingPredictionDataException Eccezione personalizzata nel caso in cui 
+	 * mancassero i dati relativi alle previsioni passate (basta che manchi un giorno)
 	 */
 	public StatisticsWeeklyHumidity(String cityName,double precision) throws InvalidPrecisionException, NonExistingPredictionDataException{
 		
@@ -101,13 +107,19 @@ public class StatisticsWeeklyHumidity {
 		
 	}
 	
-	/**
-	 * @param ZipCode
-	 * @param CountryCode
-	 * @param precision
-	 * @throws InvalidPrecisionException
-	 * @throws InvalidZipCodeException
-	 * @throws NonExistingPredictionDataException
+	/** Overloading
+	 * Secondo caso: Stringhe per lo Zip Code ed il Country Code
+	 * Costruttore della classe delle statistiche settimanali relative all'umidità
+	 * @param zipCode Stringa contenente lo Zip Code
+	 * @param countryCode Stringa contenente il Country Code
+	 * @param precision Double con il valore della precisione
+	 * @throws InvalidPrecisionException  Eccezione personalizzata nel caso in cui la precisione che
+	 * inserisce l'utente sia inferiore di 0 o superiore di 100 
+	 * (in caso non venga inserito si sceglie il 5% di default)
+	 * @throws NonExistingPredictionDataException Eccezione personalizzata nel caso in cui 
+	 * mancassero i dati relativi alle previsioni passate (basta che manchi un giorno)
+	 * @throws InvalidZipCodeException Eccezione personalizzata in caso lo Zip Code e/o il Country
+	 * code fossero sbagliati
 	 */
 	public StatisticsWeeklyHumidity(String ZipCode, String CountryCode,double precision) throws InvalidPrecisionException, InvalidZipCodeException, NonExistingPredictionDataException{
 		
@@ -162,7 +174,7 @@ public class StatisticsWeeklyHumidity {
 	}
 	
 	/**
-	 *
+	 *Overriding del metodo toString per restituire le statistiche giornaliere relative alla temperatura
 	 */
 	public String toString() { return risultato; }
 			

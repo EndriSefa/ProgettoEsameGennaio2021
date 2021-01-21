@@ -126,7 +126,7 @@ public class Controller {
 	 * "settimanali" se vogliamo vedere le statistiche su tutte le previsioni per 
 	 * oggi relative alla settimana passata
 	 * @param precisione  Parametro (Double) che inserisce l'utente con il quale vuole vedere l'
-	 * accuratezza delle previsioni
+	 * accuratezza delle previsioni (in caso non venga inserito si sceglie il 5% di default)
 	 * @param nomeCitta Parametro (Stringa) contenente il nome della città (Londra o Chicago)
 	 * @return risultato Stringa contenente le statistiche richieste
 	 * @throws InvalidPrecisionException Eccezione personalizzata nel caso in cui la precisione che
@@ -281,7 +281,7 @@ public class Controller {
 	 * "settimanali" se vogliamo vedere le statistiche su tutte le previsioni per 
 	 * oggi relative alla settimana passata
 	 * @param precisione Parametro (Double) che inserisce l'utente con il quale vuole vedere l'
-	 * accuratezza delle previsioni
+	 * accuratezza delle previsioni (in caso non venga inserito si sceglie il 5% di default)
 	 * @return risultato Stringa contenente le statistiche richieste
 	 * @throws InvalidPrecisionException Eccezione personalizzata nel caso in cui la precisione che
 	 * inserisce l'utente sia inferiore di 0 o superiore di 100
