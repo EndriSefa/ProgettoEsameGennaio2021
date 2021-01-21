@@ -115,7 +115,8 @@ public class Controller {
 		
 	
 	//metodo che stampa le statistiche ricevendo come parametro il nome della città,il periodo e la precisione
-	/**
+	/** Rotta di tipo GET che ci restituisce le statistiche della città desiderata.
+	 * La stringa della città viene ricavata da una RequestParam.
 	 * @param tipo Parametro (Stringa) contenente la categoria delle statistiche che vogliamo vedere:
 	 * "umidita" per vedere le statistiche dell' umidità , "temperatura" per vedere le statistiche
 	 * della temperatura o "totali" per vedere le statistiche sia di umitità che di temperatura.
@@ -269,7 +270,8 @@ public class Controller {
 	
 	
 	//stampa le statistiche ricevendo come parametri  Zip Code e CountryCode,periodo e precisione
-	/**
+	/**Rotta di tipo POST che ci da le statistiche della città di cui abbiamo il Country 
+	 * Code e lo Zip Code (questi due dati vengono ricavati dal RequestBody)
 	 * @param componentiURL Body da inserire con stringhe relative al "zipCode" e al "countryCode"
 	 * @param tipo Stringa contenente la categoria delle statistiche che vogliamo vedere:
 	 * "umidita" per vedere le statistiche dell' umidità , "temperatura" per vedere le statistiche
