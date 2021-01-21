@@ -32,57 +32,57 @@ Esse sono le seguenti:
  Ecco vari esempi dell'esecuzione di alcune chiamate fatte su Postman:
 
 GET| http//localhost:8080/meteoCorrente?nomeCitta=Chicago
- ---|---
+ 
 
 
 ![Screenshot (4)](https://user-images.githubusercontent.com/75529879/105379357-08fc1300-5c0d-11eb-84df-2c18f30bc9dc.png)
 
 POST|http//localhost:8080/previsioni
----|---
+
 ![Screenshot (15)](https://user-images.githubusercontent.com/75529879/105380380-1b2a8100-5c0e-11eb-8071-7735d86e2e2c.png)
 
 GET| http//localhost:8080/Statistiche?periodo=giornaliere&tipo=totali&precisione=10&nomeCitta=Chicago
----|---
+
 ![Screenshot (16)](https://user-images.githubusercontent.com/75529879/105380400-1fef3500-5c0e-11eb-8509-e96a64fb3488.png)
 
 
 
 GET|http//localhost:8080/Statistiche?periodo=settimanali&tipo=umidita&precisione=10&nomeCitta=Londra
----|---
+
 ![Screenshot (24)](https://user-images.githubusercontent.com/75529879/105382377-4b731f00-5c10-11eb-9afb-5f6fe14c1358.png)
 
 GET|http//localhost:8080/Statistiche?periodo=giornaliere&tipo=totali&precisione=10&nomeCitta=Londra
----|---
+
 ![Screenshot (23)](https://user-images.githubusercontent.com/75529879/105382672-9db44000-5c10-11eb-86e3-f8b2ff8473be.png)
 GET|http//localhost:8080/Statistiche?periodo=giornaliere&tipo=totali&precisione=10&nomeCitta=Londra
----|---
+
 ![Screenshot (21)](https://user-images.githubusercontent.com/75529879/105382935-e4a23580-5c10-11eb-8a24-2e635e6a85d1.png)
 POST|http//localhost:8080/Statistiche?periodo=settimanali&tipo=totali&precisione=10
----|---
+
 ![Screenshot (20)](https://user-images.githubusercontent.com/75529879/105382951-e9ff8000-5c10-11eb-89d4-39b260cf6fb7.png)
 
 GET|http//localhost:8080/Statistiche?periodo=settimanali&tipo=temperatura&precisione=10&nomeCitta=Londra
----|---
+
 ![Screenshot (26)](https://user-images.githubusercontent.com/75529879/105383618-95103980-5c11-11eb-927d-24d89eaea891.png)
 
 GET|http//localhost:8080/previsioni?citta=Chicago
----|---
+
 ![Screenshot (11)](https://user-images.githubusercontent.com/75529879/105383601-90e41c00-5c11-11eb-8468-2c206741a2d6.png)
 
 
 POST|http//localhost:8080/meteoCorrente
----|---
+
 ![Screenshot (8)](https://user-images.githubusercontent.com/75529879/105383571-89247780-5c11-11eb-9f64-c1dba33917f3.png)
 
 POST|http//localhost:8080/meteoCorrente
----|---
+
 ![Screenshot (7)](https://user-images.githubusercontent.com/75529879/105383564-86298700-5c11-11eb-99dc-39135001870b.png)
 POST|http//localhost:8080/meteoCorrente
----|---
+
 ![Screenshot (6)](https://user-images.githubusercontent.com/75529879/105383546-832e9680-5c11-11eb-96d4-4d97ec0c920b.png)
 
 GET|http//localhost:8080/meteoCorrente?nomeCitta=Londra
----|---
+
 ![Screenshot (5)](https://user-images.githubusercontent.com/75529879/105383523-7f027900-5c11-11eb-854d-827cb6c9d471.png)
 
 
